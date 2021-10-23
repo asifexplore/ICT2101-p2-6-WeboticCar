@@ -1,27 +1,26 @@
 from flask import render_template, url_for, request, redirect
 from init import app
-import UserManagement
-from UserManagement import currentUser, userLogin, addStudent
+from UserManagement import userLogin, addStudent, redirectDashboard
 
 
 
 @app.route('/')
 def index():
-    return UserManagement.redirectDashboard() 
+    return redirectDashboard() 
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return render_template("dashboard.html")
+        return render_template("login.html")
     else:
         if userLogin(request.form['username'], request.form['password']):
             return render_template("dashboard.html")
         return render_template("login.html")
 
 @app.route('/addStudent', methods = ['GET', 'POST'])
-def addStudent():
-    UserManagement.addStudent(request.form['username'], request.form['password'])
-    return UserManagement.redirectDashboard()
+def register():
+    addStudent(request.form['username'], request.form['password'])
+    return redirectDashboard()
 
 if __name__ == "__main__":
     context = ('cert.pem', 'key.pem')

@@ -1,30 +1,17 @@
 from flask import session
 from flask.templating import render_template
-from init import db
+from init import db, User
 from passlib.hash import pbkdf2_sha256
 
 
-currentUser = None
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    password = db.Column(db.String(80))
-    role = db.Column(db.Integer)
-
-    def __init__(self, username, password, role):
-        self.username = username
-        self.password = password
-        self.role = role
-
-    def __repr__(self):
-        return '<User %r>' % self.id
     
 def userLogin(username, password):
-    found = User.query.filter_by(username=username)
+    found = User.query.filter_by(username=username).first()
     if found:
-        if found.password is pbkdf2_sha256.verify(password):
-            currentUser = found
+        if pbkdf2_sha256.verify(password, found.password):
+            session['role'] = found.role
+            session['logged_in'] = found.username
             return True
     else:
         return False
