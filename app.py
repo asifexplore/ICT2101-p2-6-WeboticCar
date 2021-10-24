@@ -1,6 +1,6 @@
 from flask import render_template, url_for, request, redirect
 from init import app
-from UserManagement import userLogin, addStudent, redirectDashboard
+from UserManagement import userLogin, addStudent, redirectDashboard, carSync
 
 
 
@@ -16,6 +16,13 @@ def login():
         if userLogin(request.form['username'], request.form['password']):
             return render_template("dashboard.html")
         return render_template("login.html")
+
+
+@app.route('/sync', methods = ['POST'])
+def sync():
+    json_data = request.json
+    return carSync(json_data["car_id"], json_data["car_pass"])
+
 
 @app.route('/addStudent', methods = ['GET', 'POST'])
 def register():
