@@ -10,12 +10,18 @@ $ pip install virtualenv
 
 2. Open a terminal in the project root directory and run:
 ```
+Windows:
 $ virtualenv env
+Mac:
+$ venv env
 ```
 
 3. Then run the command:
 ```
+Windows:
 $ .\env\Scripts\activate
+Mac:
+$ source venv/bin/activate
 ```
 
 4. Then install the dependencies:
