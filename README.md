@@ -3,9 +3,11 @@
 This repo has been updated to work with `Python v3.8` and up.
 
 ### How To Run
-1. Install `virtualenv`:
-```
-$ pip install virtualenv
+1. Install `virtualenv` & other dependencies:
+ ```
+ $ pip install virtualenv
+ $ pip install flask
+ $ pip install flask_sslify
 ```
 
 2. Open a terminal in the project root directory and run:
