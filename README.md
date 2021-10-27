@@ -23,7 +23,7 @@ $ venv env
 Windows:
 $ .\env\Scripts\activate
 Mac:
-$ source venv/bin/activate
+$ source env/bin/activate
 ```
 
 4. Then install the dependencies:
