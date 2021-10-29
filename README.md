@@ -11,10 +11,12 @@ This repo has been updated to work with `Python v3.8` and up.
 ```
 
 2. Open a terminal in the project root directory and run:
-```
 Windows:
+```
 $ virtualenv env
+```
 Mac:
+```
 $ venv env
 ```
 
