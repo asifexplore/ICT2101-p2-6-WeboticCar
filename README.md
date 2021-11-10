@@ -57,7 +57,7 @@ Nadzim (Developer)
 A total of 7 branches will be used: Master, Development, feature/Login-Landing-Page-Angie, feature/Start-Game-Asif, feature/Create-Map-Marven, feature/Score-Board-Nadzim and feature/Map-Update-and-Calculation-Kok Hwee.
 
 ### Master ###
-Master branch will be the pristine ntergrated branch bug and error free.
+Master branch will be the pristine intergrated branch bug and error free.
 It will only be committed after the tests have been done at the Development branch and by the technical leader which is
 by Kok Hwee only.
 
