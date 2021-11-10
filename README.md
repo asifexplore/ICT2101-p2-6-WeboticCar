@@ -46,6 +46,7 @@ if __name__ == "__main__":
 ```
 
 ### Development Workflow section ###
+a brief description of team workflow using git and GitHub features
 
 ### UAT section ###
 3 mins to cover the system
