@@ -2,7 +2,7 @@
 
 This repo has been updated to work with `Python v3.8` and up.
 
-### How To Run
+### How To Run ###
 1. Install `virtualenv` & other dependencies:
  ```
  $ pip install virtualenv
@@ -44,3 +44,12 @@ This server will start on port 5000 by default. You can change this in `app.py` 
 if __name__ == "__main__":
     app.run(debug=True, port=<desired port>)
 ```
+
+### Development Workflow section ###
+
+### UAT section ###
+3 mins to cover the system
+
+
+### Whitebox Testing ###
+animated gif or short one min video
