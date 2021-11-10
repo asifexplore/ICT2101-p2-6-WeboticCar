@@ -47,20 +47,24 @@ if __name__ == "__main__":
 
 ### Development Workflow ###
 
-A total of 7 branches will be used: Master, Development, Angie, Asif, Marven, Nadzim and Kok Hwee.
+A total of 7 branches will be used: Master, Development, feature/Login-Landing-Page-Angie, feature/Start-Game-Asif, feature/Create-Map-Marven, feature/Score-Board-Nadzim and feature/Map-Update-and-Calculation-Kok Hwee.
 
+Master
 Master branch will be the pristine ntergrated branch bug and error free.
-It will only be committed after the tests have been done at the Development branch.
+It will only be committed after the tests have been done at the Development branch and by the technical leader which is
+by Kok Hwee only.
 
+Development
 Development branch will be used for testing where we intergrate our individual components together
 to test out all the features. Only when it is bug and error free, then it will be committed to
 the Master branch.
 
+Features
 Angie, Asif, Marven, Nadzim and Kok Hwee branches will be used to to test our own individual components.
 Once it is bug and error free, it will be commited to the Development branch.
 
 
-
+*The two videos are very important because this module do not have a presentation*
 ### UAT section ###
 3 mins to cover the system
 
