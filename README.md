@@ -47,6 +47,13 @@ if __name__ == "__main__":
 
 ### Development Workflow ###
 
+### Roles: ###
+Marven (Team Leader)
+Kok Hwee (Technical Leader)
+Asif (Developer)
+Angie (Developer)
+Nadzim (Developer)
+
 A total of 7 branches will be used: Master, Development, feature/Login-Landing-Page-Angie, feature/Start-Game-Asif, feature/Create-Map-Marven, feature/Score-Board-Nadzim and feature/Map-Update-and-Calculation-Kok Hwee.
 
 ### Master ###
