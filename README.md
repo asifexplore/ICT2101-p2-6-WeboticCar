@@ -45,8 +45,21 @@ if __name__ == "__main__":
     app.run(debug=True, port=<desired port>)
 ```
 
-### Development Workflow section ###
-a brief description of team workflow using git and GitHub features
+### Development Workflow ###
+
+A total of 7 branches will be used: Master, Development, Angie, Asif, Marven, Nadzim and Kok Hwee.
+
+Master branch will be the pristine ntergrated branch bug and error free.
+It will only be committed after the tests have been done at the Development branch.
+
+Development branch will be used for testing where we intergrate our individual components together
+to test out all the features. Only when it is bug and error free, then it will be committed to
+the Master branch.
+
+Angie, Asif, Marven, Nadzim and Kok Hwee branches will be used to to test our own individual components.
+Once it is bug and error free, it will be commited to the Development branch.
+
+
 
 ### UAT section ###
 3 mins to cover the system
