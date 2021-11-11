@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+        #!! -------------End Game:------------- 
+        #!! checkHighscore(commands, time, getminHighscore())
+
+            #!! getminHighscore():
+            #!!     minHighscore = SELECT highscoreCommands, highscoreTime FROM HighscoreTable WHERE highscoreTime = MIN from db
+            #!!     highscoreCommands, highscoreTime = minHighscore
+            #!!     return highscoreCommands, highscoreTime
+
+            #!! addHighscore(commands, time):
+            #!!     route to addHighscore.html (commands, time)
+
+            #!! backtoDashboard():
+            #!!     route to challengecompleted.html
+
+            #!! checkHighscore(commands, time, getminHighscore()):
+            #!!     highscoreCommands, highscoreTime = getminHighscore()
+            #!!     if (time <= highscoreTime && commands < highscoreCommands):
+            #!!         return addHighscore(commands, time)
+            #!!     else:
+            #!!         return backtoDashboard()
+
+    # -----JS Pop-up with highscore table [addHighscore(commands, time)]-----
+    # Fields: setUsername() = name, setScore() = [getCommands(), getTime()]
+    # getHighscore():
+    #       return SELECT * FROM HighscoreTable from db
+    # Display Highscore Table: Sort by Time Ranking {name,commands,time} with new Highscore
+    # Submit button
+    # setHighscore(getUsername(), getScore()):
+    #       UPDATE {username, commands, time} to db
+    {% block body %}{% endblock %}
+</body>
+</html>
