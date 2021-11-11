@@ -22,6 +22,12 @@ def register():
     addStudent(request.form['username'], request.form['password'])
     return redirectDashboard()
 
+
+@app.route('/test')
+def test():
+    return render_template("test.html")
+
+
 if __name__ == "__main__":
     context = ('cert.pem', 'key.pem')
     app.run(ssl_context = context, debug = True)
