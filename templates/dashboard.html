@@ -1,51 +1,15 @@
-{% extends 'base.html' %}
-
-{% block head %}
+{% extends 'base.html' %} {% block head %}
 <title>Dashboard</title>
 {% endblock %}
 
 <!-- inside the body tag, check for role and display certain elements -->
-{% block body %}
-
-{% if session['role'] == 1 %}
+{% block body %} {% if session['role'] == 1 %}
 <!-- HTML code for Teacher Dashboard here-->
-<!--  
-    TO DO:
-        *Manage Student*
-        1. View Student:
-            Click on "Students" tab to display table of all students existing in system
-        2. Create Student account:
-            2a) In students tab, Click on "+" on top of table to create new student account. 
-            2b) Popup form would appear to create student account.
-        3. Delete Student account:
-            3a) In students tab, Click on "x" on the right side of a student account.
-            3b) Popup confirmation will appear to confirm deletion.
-            3c) Teacher can click on "Delete" or "Cancel"
-        4. Reset Student's Password:
-            4a) In students tab, Click on "Gear Icon" on the right side of a student acccount.
-            4b) Popup confirmation will appear
-            4c) Teacher to provide new password.
-            4d) Teacher to reenter new password.
-            4e) Teacher clicks on "Reset Password" or "Cancel" button
--->
 
 {% elif session['role'] == 0 %}
 <!--HTML code for student Dashboard here-->
-<!--
-    TO DO:
-        1. Overview of the maze (Map)
-        2. Instructions Table
-            2a) View instructions that have been queued
-            2a) Queue their desired instructions
-            2b) Instructions to be carried out sequentially
-            2c) Instructions would be presented in a table format
-            2d) Student able to remove instruction from queue by clicking "x", on ride side of instruction
-        3. Click on "Stats" Tab; displays stats of car; speed of car, distance travelled.
 
--->
 {% else %}
 <!--error handling-->
 
-{% endif %}
-
-{% endblock %}
+{% endif %} {% endblock %}

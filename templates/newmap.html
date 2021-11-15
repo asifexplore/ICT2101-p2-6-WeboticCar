@@ -1,0 +1,146 @@
+<!--page for drawing new map-->
+{% extends 'base.html' %} {% block head %}
+
+<link rel="stylesheet" href="{{url_for('static', filename='css/map.css')}}">
+<script src="{{url_for('static', filename='js/map.js')}}"></script>
+
+<title>Create Map</title>
+{% endblock %} {% block body %}
+<table>
+    <tr id="1">
+        <td class="obstacle" id="1a" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="1b" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="1c" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="1d" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="1e" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="1f" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="1g" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="1h" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="1i" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="1j" onclick='cycleValue(this.id);'></td>
+    </tr>
+    <tr id="2">
+        <td class="obstacle" id="2a" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="2b" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="2c" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="2d" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="2e" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="2f" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="2g" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="2h" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="2i" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="2j" onclick='cycleValue(this.id);'></td>
+    </tr>
+    <tr id="3">
+        <td class="obstacle" id="3a" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="3b" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="3c" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="3d" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="3e" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="3f" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="3g" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="3h" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="3i" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="3j" onclick='cycleValue(this.id);'></td>
+    </tr>
+    <tr id="4">
+        <td class="obstacle" id="4a" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="4b" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="4c" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="4d" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="4e" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="4f" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="4g" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="4h" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="4i" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="4j" onclick='cycleValue(this.id);'></td>
+    </tr>
+    <tr id="5">
+        <td class="obstacle" id="5a" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="5b" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="5c" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="5d" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="5e" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="5f" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="5g" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="5h" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="5i" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="5j" onclick='cycleValue(this.id);'></td>
+    </tr>
+    <tr id="6">
+        <td class="obstacle" id="6a" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="6b" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="6c" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="6d" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="6e" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="6f" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="6g" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="6h" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="6i" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="6j" onclick='cycleValue(this.id);'></td>
+    </tr>
+    <tr id="7">
+        <td class="obstacle" id="7a" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="7b" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="7c" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="7d" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="7e" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="7f" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="7g" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="7h" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="7i" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="7j" onclick='cycleValue(this.id);'></td>
+    </tr>
+    <tr id="8">
+        <td class="obstacle" id="8a" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="8b" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="8c" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="8d" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="8e" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="8f" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="8g" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="8h" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="8i" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="8j" onclick='cycleValue(this.id);'></td>
+    </tr>
+    <tr id="9">
+        <td class="obstacle" id="9a" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="9b" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="9c" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="9d" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="9e" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="9f" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="9g" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="9h" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="9i" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="9j" onclick='cycleValue(this.id);'></td>
+    </tr>
+    <tr id="0">
+        <td class="obstacle" id="0a" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="0b" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="0c" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="0d" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="0e" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="0f" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="0g" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="0h" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="0i" onclick='cycleValue(this.id);'></td>
+        <td class="obstacle" id="0j" onclick='cycleValue(this.id);'></td>
+    </tr>
+</table>
+<form action="/createMap" id=mapform method="POST">
+    <input type="hidden" id="one" name="one" value="" />
+    <input type="hidden" id="two" name="two" value="" />
+    <input type="hidden" id="three" name="three" value="" />
+    <input type="hidden" id="four" name="four" value="" />
+    <input type="hidden" id="five" name="five" value="" />
+    <input type="hidden" id="six" name="six" value="" />
+    <input type="hidden" id="seven" name="seven" value="" />
+    <input type="hidden" id="eight" name="eight" value="" />
+    <input type="hidden" id="nine" name="nine" value="" />
+    <input type="hidden" id="ten" name="ten" value="" />
+    <input type="text" id="mname" name="name" />
+    <input type="submit" value="Create" />
+</form>
+
+{% endblock %}
