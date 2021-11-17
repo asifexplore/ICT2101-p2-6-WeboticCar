@@ -1,7 +1,8 @@
 body, html {
     margin: 0;
-    font-family: sans-serif;
-    background-color: lightblue;
+    color: #ffffff;
+    font-family: "Gill Sans MT";
+    background-color: #94B3FD;
 }
 
 .content {

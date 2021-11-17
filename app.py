@@ -1,4 +1,4 @@
-from flask import render_template, url_for, request, redirect
+from flask import render_template, url_for, request, redirect, session
 from init import app
 from UserManagement import userLogin, addStudent, redirectDashboard
 
@@ -17,10 +17,10 @@ def login():
             return render_template("dashboard.html")
         return render_template("login.html")
 
-@app.route('/addStudent', methods = ['GET', 'POST'])
-def register():
-    addStudent(request.form['username'], request.form['password'])
-    return redirectDashboard()
+# @app.route('/addStudent', methods = ['GET', 'POST'])
+# def register():
+#     addStudent(request.form['username'], request.form['password'])
+#     return redirectDashboard()
 
 if __name__ == "__main__":
     context = ('cert.pem', 'key.pem')
