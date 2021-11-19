@@ -1,4 +1,5 @@
 from flask import render_template, url_for, request, redirect
+from flask.helpers import send_from_directory
 from init import app
 from UserManagement import userLogin, addStudent, redirectDashboard
 
@@ -7,6 +8,14 @@ from UserManagement import userLogin, addStudent, redirectDashboard
 @app.route('/')
 def index():
     return redirectDashboard() 
+
+@app.route('/game_start')
+def gameStart():
+    return render_template("testing/game_start.html")
+# Routing Background Sounds 
+@app.route('/media/<path:filename>')
+def download_file(filename):
+    return send_from_directory("media/",filename)
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():

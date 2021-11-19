@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Demo: Generating JavaScript</title>
+     <script type=text/javascript src="{{
+      url_for('static', filename='js/blockly_compressed.js') }}"></script>
+           <script type=text/javascript src="{{
+      url_for('static', filename='js/blocks_compressed.js') }}"></script>
+           <script type=text/javascript src="{{
+      url_for('static', filename='js/en.js') }}"></script>
+           <script type=text/javascript src="{{
+      url_for('static', filename='js/javascript_compressed.js') }}"></script>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+  </style>
+</head>
+<body>
+  <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
+    <a href="../index.html">Demos</a> &gt; Generating JavaScript</h1>
+
+  <p>This is a simple demo of generating code from blocks and running
+  the code in a sandboxed JavaScript interpreter.</p>
+
+  <p>&rarr; More info on <a href="https://developers.google.com/blockly/guides/configure/web/code-generators">Code Generators</a> and <a href="https://developers.google.com/blockly/guides/app-integration/running-javascript">Running JavaScript</a>.</p>
+
+  <p>
+    <button onclick="showCode()">Show JavaScript</button>
+    <button onclick="runCode()">Run JavaScript</button>
+  </p>
+
+  <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+  <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+    <block type="move_block" id="^f+eSmxMe^PS7#w+O?(H" x="37" y="38">
+      <field name="movement">0</field>
+    </block>
+    <block type="move_block" id="^f+eSmxMe^PS7#w+O?(H" x="37" y="38">
+      <field name="movement">1</field>
+    </block>
+    <block type="move_block" id="^f+eSmxMe^PS7#w+O?(H" x="37" y="38">
+      <field name="movement">2</field>
+    </block>
+  </xml>
+
+  <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
+  </xml>
+      <script> 
+        Blockly.Blocks['move_block'] = {
+          init: function() {
+            this.appendDummyInput()
+                .appendField("Move Car")
+                .appendField(new Blockly.FieldDropdown([["Straight","0"], ["Left","1"], ["Right","2"]]), "movement");
+            this.setPreviousStatement(true, null);
+            this.setNextStatement(true, null);
+            this.setColour(230);
+            this.setTooltip("");
+            this.setHelpUrl("");
+          }
+        };
+      Blockly.JavaScript['move_block'] = function(block) {
+      var dropdown_movement = block.getFieldValue('movement');
+      // TODO: Assemble JavaScript into code variable.
+      var code = dropdown_movement + '\n';
+      return code;
+      };
+    
+
+    // Function for Submit Button 
+    function submitFunction()
+    {
+      // Get Instructions style
+
+      // Alert the Instructions received
+      console.log("Submit Button!");
+      showCode();
+    }
+  </script> 
+  <script>
+    var demoWorkspace = Blockly.inject('blocklyDiv',
+        {media: '../../media/',
+         toolbox: document.getElementById('toolbox')});
+    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+                               demoWorkspace);
+
+    function showCode() {
+      // Generate JavaScript code and display it.
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+      console.log("Codes Inputted : " + code);
+      // Axios 
+      // Add into Database
+    }
+
+    function runCode() {
+      // Generate JavaScript code and run it.
+      window.LoopTrap = 1000;
+      Blockly.JavaScript.INFINITE_LOOP_TRAP =
+          'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+      var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      try {
+        eval(code);
+      } catch (e) {
+        alert(e);
+      }
+    }
+  </script>
+
+
+</body>
+</html>
