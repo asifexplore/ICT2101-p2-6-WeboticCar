@@ -1,4 +1,4 @@
-from flask import render_template, url_for, request, redirect
+from flask import render_template, url_for, request, redirect, session
 from init import app
 from controller.userManagement import isTeacher
 from controller.mapControl import createMap, isValidMap, makeChallenge
