@@ -1,15 +1,14 @@
 <!--page for drawing new map-->
-{% extends 'base.html' %}
+{% extends 'dashboard.html' %}
+
 
 {% block head %}
-
 <link rel="stylesheet" href="{{url_for('static', filename='css/map.css')}}">
 <script src="{{url_for('static', filename='js/map.js')}}"></script>
 
 <title>Create Map</title>
 {% endblock %}
-
-{% block body %}
+{% block main %}
 <table>
   <tr id = "1">
     <td class="obstacle" id = "1a" onclick='cycleValue(this.id);'></td>

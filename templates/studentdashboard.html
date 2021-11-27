@@ -1,13 +1,43 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Student Dashboard</title>
+<title>Webotic Car - Student</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 {% endblock %}
-
-{% block body %}
-
 <!--HTML code for student Dashboard here-->
+{#{% block content %}#}
+
+{#<form>#}
+{#<input type="number" name="pin" placeholder="Enter PIN" min="0" max="999999">#}
+{#<input type="submit" value="Start">#}
+{#</form>#}
+{#{% endblock %}#}
+
 {% block content %}
-
-
+    <div class="container">
+        <table class="table table-striped bg-light">
+            <tr>
+                <th>name</th>
+                <th>pin</th>
+                <th></th>
+            </tr>
+            {% for challenge in challenges %}
+                <tr>
+                    <td>{{ challenge.name }}</td>
+                    <td>{{ challenge.pin }}</td>
+                    <td>
+                        <a href="#" class="btn">Edit</a>
+                    </td>
+                </tr>
+            {%  endfor %}
+        </table>
+    <form>
+        <input type="number" name="pin" placeholder="PIN" min="0" max="999999" size="50">
+        <input type="submit" value="Start">
+    </form>
+    </div>
 {% endblock %}
