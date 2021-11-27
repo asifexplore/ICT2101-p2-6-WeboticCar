@@ -41,4 +41,11 @@ class Cars(db.Model):
         self.ip_addr = Null
         self.token = Null
 
+class Highscore(db.Model):
+    map_id = db.column(db.Integer, primary_key=True)
+    rank = db.column(db.Integer)
+    name = db.column(db.String(10))
+    commands = db.Column(db.Integer)
+    time = db.Column(db.Numeric)
+
 db.create_all()

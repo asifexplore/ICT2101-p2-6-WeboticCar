@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<container>
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Commands</th>
+        <th>time</th>
+      </tr>
+    </thead>
+      {% for i, (tableMap_id, tableRank, tableName, tableCommands, tableTime) in detailsTable %}
+      <tr>
+        <td>{{ tableRank }}</td>
+        <td>{{ tableName }}</td>
+        <td>{{ tableCommands }}</td>
+        <td>{{ tableTime }}</td>
+      </tr>
+      {% endfor %} 
+    </tbody>
+  </table>
+  <!--Exit button-->
+</container>
+{% endblock %}
