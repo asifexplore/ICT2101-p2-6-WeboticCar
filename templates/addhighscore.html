@@ -14,21 +14,19 @@
       <tr>
         <th>Rank</th>
         <th>Name</th>
-        <th>Commands</th>
-        <th>Time</th>
+        <th>Score</th>
       </tr>
     </thead>
     <tbody>
-      {% for (tableMap_id, tableRank, tableName, tableCommands, tableTime) in getHighscoretable(request.map_id) %}
+      {% for i, (scoreId, mapId, name, score) in getHighscoretable(request.map_id) %}
       <tr>
-        <td>{{ tableRank }}</td>
-        <td>{{ tableName }}</td>
-        <td>{{ tableCommands }}</td>
-        <td>{{ tableTime }}</td>
+        <th>{{ i }}</th>
+        <th>{{ name }}</th>
+        <th>{{ score }}</th>
       </tr>
       {% endfor %} 
     </tbody>
   </table>
-  <!--Exit button-->
+  <button>Exit</button>
 </container>
 {% endblock %}

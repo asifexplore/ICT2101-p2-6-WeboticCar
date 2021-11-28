@@ -7,16 +7,14 @@
       <tr>
         <th>Rank</th>
         <th>Name</th>
-        <th>Commands</th>
-        <th>time</th>
+        <th>Score</th>
       </tr>
     </thead>
-      {% for i, (tableMap_id, tableRank, tableName, tableCommands, tableTime) in detailsTable %}
+      {% for i, (scoreId, mapId, name, score) in detailsTable %}
       <tr>
-        <td>{{ tableRank }}</td>
-        <td>{{ tableName }}</td>
-        <td>{{ tableCommands }}</td>
-        <td>{{ tableTime }}</td>
+        <td>{{ i }}</td>
+        <td>{{ name }}</td>
+        <td>{{ score }}</td>
       </tr>
       {% endfor %} 
     </tbody>

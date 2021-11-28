@@ -1,5 +1,6 @@
 from flask import render_template, url_for, request, redirect
 from init import app
+from flask import session
 from controller.userManagement import isTeacher
 from controller.mapControl import createMap, isValidMap, makeChallenge
 from controller.scoreControl import *
@@ -43,17 +44,8 @@ def endgame():
 
 @app.route('/addHighscore', methods = ['GET', 'POST'])
 def addHighscore():
-        #sort highscore table
-    setHighscore(request.username, request.score, request.map_id)
-    # "INSERT INTO Highscore'map_id' WHERE map_id = ? VALUES (?,?,?)"
-
-# @app.route('/checkhighscore')
-# def checkHighscore():
-#     hstable = Highscore.query
-#     if checkHighscore(my_var) == True:
-#         return render_template('checkhighscore.html')
-#     else:
-#         return render_template('challengecompleted.html')
+    setHighscore(request.score, request.username, getHighscoretable(request.map_id))
+    redirect(url_for('challengecompleted'))
 
 
 @app.route('/playgame')
