@@ -8,6 +8,9 @@ from flask import Flask
 from flask_sslify import SSLify
 from sqlalchemy.sql.elements import Null
 
+from controller import mapControl
+import sqlite3
+
 app = Flask(__name__)
 app.secret_key = "wow_so_secret!"
 
@@ -16,8 +19,7 @@ sslify = SSLify(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
-db.app = app
-
+# db.app = app
 
 def commit():
     db.session.commit()
@@ -74,7 +76,6 @@ class Map(db.Model):
         self.pin = pin
         return True
 
-
 db.create_all()
 
 
@@ -86,13 +87,14 @@ def index():
 @app.route('/createMap', methods=['GET', 'POST'])
 def createNewMap():
     # comment out this line if testing without teacher account
-    if not isTeacher():
-        return render_template('login.html')
+    # if not isTeacher():
+    #     return render_template('login.html')
 
     if request.method == 'GET':
         return createMap(0)
     elif request.method == 'POST':
         form = request.form
+
         if(isValidMap(form)):
             return createMap(form)
         else:
@@ -109,10 +111,16 @@ def createNewChallenge():
     return makeChallenge(map_id, pin)
 
 
-@app.route('/game')
-def game():
-    return render_template("game.html")
+@app.route('/game/<game_id>')
+def game(game_id):
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    # c.row_factory = sqlite3.Row
 
+    c.execute("SELECT * FROM map WHERE map_id = ?", str(game_id))
+    game_map = c.fetchone()
+    return render_template("game_map.html", game_map=game_map)
+    
 
 if __name__ == "__main__":
     context = ('cert.pem', 'key.pem')

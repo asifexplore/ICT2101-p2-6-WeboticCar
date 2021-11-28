@@ -1,6 +1,6 @@
 <!--page for drawing new map-->
 {% extends 'base.html' %} {% block head %}
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/map.css')}}">
 <script src="{{url_for('static', filename='js/map.js')}}"></script>
 
@@ -140,7 +140,7 @@
     <input type="hidden" id="nine" name="nine" value="" />
     <input type="hidden" id="ten" name="ten" value="" />
     <input type="text" id="mname" name="name" />
-    <input type="submit" value="Create" />
+    <input type="button" id="createBtn" value="Create" />
 </form>
 
 {% endblock %}
