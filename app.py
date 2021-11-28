@@ -1,14 +1,13 @@
 from flask import render_template, url_for, request, redirect
 from init import app
-from controller.userManagement import *
+from controller.userManagement import isTeacher
+from controller.mapControl import createMap, isValidMap, makeChallenge
 from controller.scoreControl import *
-from controller.mapControl import *
-
 
 
 @app.route('/')
 def index():
-    return render_template("landing.html") 
+    return render_template("landing.html")
 
 @app.route('/createMap', methods = ['GET', 'POST'])
 def createNewMap():
@@ -39,7 +38,7 @@ def endgame():
         score = request.commands, request.time
         if checkHighscore(score,getHighscoretable(request.map_id)):
             redirect(url_for('challengecompleted'))
-        else: 
+        else:
             redirect(url_for('addHighscore'))
 
 @app.route('/addHighscore', methods = ['GET', 'POST'])
