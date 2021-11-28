@@ -81,13 +81,13 @@
                 {% for i in range(1, 11) %}
                 {% for item in game_map[i] %}
                 {% if item == "1" %}
-                <div class="cell road specialBlocks" id=""></div>
+                <div class="cell road specialBlocks" value="{{ item }}"></div>
                 {% elif item == "2" %}
-                <div class="cell start specialBlocks" id=""></div>
+                <div class="cell start specialBlocks" value="{{ item }}"></div>
                 {% elif item == "3" %}
-                <div class="cell end specialBlocks" id=""></div>
+                <div class="cell end specialBlocks" value="{{ item }}"></div>
                 {% else %}
-                <div class="cell" id=""></div>
+                <div class="cell" value="{{ item }}"></div>
                 {% endif %}
                 {% endfor %}
                 {% endfor %}
