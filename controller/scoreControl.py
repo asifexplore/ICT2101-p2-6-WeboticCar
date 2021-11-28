@@ -18,7 +18,7 @@ def checkHighscore(score, highscoreTable):
 
 def setHighscore(score, username, highscoreTable):
     lst = len(highscoreTable) 
-    a = tuple([uuid.uuid4(), highscoreTable[0][1],score,username])
+    a = tuple([uuid.uuid4(), highscoreTable[0][1], score, username])
     lst.append(a)
     for i in range(0, lst): 
         for j in range(0, lst-i-1): 
@@ -28,7 +28,7 @@ def setHighscore(score, username, highscoreTable):
                 highscoreTable[j + 1]= temp 
     b = lst.pop
     Highscore.query("DELETE FROM Highscore WHERE score_id = ?", b[0])
-    Highscore.query("INSERT INTO Highscore VALUES {?,?,?,?}", a[0], a[1],a[2],a[3])
+    Highscore.query("INSERT INTO Highscore VALUES {?,?,?,?}", a[0], a[1], a[2], a[3])
 
     # score_id, map_id, name, score, 
     # insertsort and rerank
