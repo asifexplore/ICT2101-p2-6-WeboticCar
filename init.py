@@ -33,30 +33,12 @@ class User(db.Model):
 
 class Map(db.Model):
     map_id = db.Column(db.Integer, primary_key=True)
-    one = db.Column(db.String(10))
-    two = db.Column(db.String(10))
-    three = db.Column(db.String(10))
-    four = db.Column(db.String(10))
-    five = db.Column(db.String(10))
-    six = db.Column(db.String(10))
-    seven = db.Column(db.String(10))
-    eight = db.Column(db.String(10))
-    nine = db.Column(db.String(10))
-    ten = db.Column(db.String(10))
+    grid=db.Column(db.String(100))
     name = db.Column(db.String(20))
     pin = db.Column(db.Integer, nullable=True)
 
-    def __init__(self, one, two, three, four, five, six, seven, eight, nine, ten, name):
-        self.one = one
-        self.two = two
-        self.three = three
-        self.four = four
-        self.five = five
-        self.six = six
-        self.seven = seven
-        self.eight = eight
-        self.nine = nine
-        self.ten = ten
+    def __init__(self, grid, name):
+        self.grid=grid
         self.name = name
         db.session.add(self)
         db.session.commit()
@@ -66,6 +48,12 @@ class Map(db.Model):
 
     def setPIN(self, pin: int) -> bool:
         self.pin = pin
+        return True
+    def clearPIN(self):
+        self.pin = Null
+
+    def clearChallenge(self) -> bool:
+        self.pin = Null
         return True
 
 db.create_all()
