@@ -12,20 +12,22 @@ app.secret_key = "wow_so_secret!"
 context = ('cert.pem', 'key.pem')
 sslify = SSLify(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 db.app = app
+
+def commit():
+    db.session.commit()
+    return
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(80))
-    role = db.Column(db.Integer)
 
-    def __init__(self, username, password, role):
+    def __init__(self, username, password):
         self.username = username
         self.password = password
-        self.role = role
 
     def __repr__(self):
         return '<User %r>' % self.id
@@ -47,5 +49,30 @@ class Highscore(db.Model):
     map_id = db.column(db.Integer)
     name = db.column(db.String(10))
     score = db.Column(db.Integer)
+
+class Map(db.Model):
+    map_id = db.Column(db.Integer, primary_key=True)
+    grid=db.Column(db.String(100))
+    name = db.Column(db.String(20))
+    pin = db.Column(db.Integer, nullable=True)
+
+    def __init__(self, grid, name):
+        self.grid=grid
+        self.name = name
+        db.session.add(self)
+        db.session.commit()
+s
+    def __repr__(self):
+        return '<Map %r>' % self.map_id
+
+    def setPIN(self, pin: int) -> bool:
+        self.pin = pin
+        return True
+    def clearPIN(self):
+        self.pin = Null
+
+    def clearChallenge(self) -> bool:
+        self.pin = Null
+        return Trues
 
 db.create_all()

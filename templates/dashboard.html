@@ -1,13 +1,9 @@
-{% extends 'base.html' %}
-
-{% block head %}
+{% extends 'base.html' %} {% block head %}
 <title>Dashboard</title>
 {% endblock %}
 
 <!-- inside the body tag, check for role and display certain elements -->
-{% block body %}
-
-{% if session['role'] == 1 %}
+{% block body %} {% if session['role'] == 1 %}
 <!-- HTML code for Teacher Dashboard here-->
 
 {% elif session['role'] == 0 %}
@@ -16,6 +12,4 @@
 {% else %}
 <!--error handling-->
 
-{% endif %}
-
-{% endblock %}
+{% endif %} {% endblock %}

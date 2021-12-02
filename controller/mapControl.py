@@ -1,4 +1,4 @@
-from flask.helpers import url_for
+sfrom flask.helpers import url_for
 from flask.templating import render_template
 from werkzeug.utils import redirect
 from init import Map

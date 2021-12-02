@@ -1,4 +1,5 @@
 function cycleValue(id){
+    console.log(id);
     switch(document.getElementById(id).className){
         case "obstacle":
             nextClass = "road";
@@ -28,7 +29,6 @@ function doSubmit(){
     document.getElementById("eight").value = classToInt(document.getElementById("8"));
     document.getElementById("nine").value = classToInt(document.getElementById("9"));
     document.getElementById("ten").value = classToInt(document.getElementById("0"));
-    return true;
 }
 
 function classToInt(row){
@@ -51,3 +51,11 @@ function classToInt(row){
     }
     return int;
 }
+
+$(document).ready(function() {
+    $("#createBtn").click(function() {
+        doSubmit();
+        $("#mapform").submit();
+    });
+});
+
