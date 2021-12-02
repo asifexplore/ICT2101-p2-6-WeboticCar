@@ -1,7 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from flask_sslify import SSLify
+import sqlalchemy
 from sqlalchemy.sql.elements import Null
+from random import randint
+
+from sqlalchemy.sql.operators import nullslast_op
 
 app = Flask(__name__)
 app.secret_key = "wow_so_secret!"
@@ -40,20 +44,21 @@ class Map(db.Model):
     def __init__(self, grid, name):
         self.grid=grid
         self.name = name
+        self.pin = None
         db.session.add(self)
         db.session.commit()
 
     def __repr__(self):
         return '<Map %r>' % self.map_id
 
-    def setPIN(self, pin: int) -> bool:
-        self.pin = pin
+    def setPIN(self) -> bool:
+        self.pin = randint(1000,9999)        
+        db.session.commit()
         return True
-    def clearPIN(self):
-        self.pin = Null
 
-    def clearChallenge(self) -> bool:
-        self.pin = Null
+    def clearPIN(self) -> bool:
+        self.pin = sqlalchemy.null()
+        db.session.commit()
         return True
 
 db.create_all()
