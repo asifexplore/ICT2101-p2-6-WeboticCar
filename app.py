@@ -1,7 +1,7 @@
 from flask import render_template, url_for, request, redirect
 from init import app
 from controller.userManagement import redirectTeacher
-from controller.mapControl import createMap, isValidMap, makeChallenge, deleteMap, getGrid
+from controller.mapControl import createMap, isValidMap, makeChallenge, stopChallenge, deleteMap, getGrid
 
 @app.route('/')
 def index():
@@ -31,16 +31,13 @@ def createNewMap():
 def delMap(id):
     return deleteMap(id)
 
+@app.route('/createChallenge/<id>')
+def createChallenge(id):
+    return makeChallenge(id)
 
-@app.route('/createChallenge', methods=['POST'])
-def createNewChallenge():
-    try:
-        map_id = request.form['map_id']
-        pin = request.form['pin']
-    except:
-        return redirect(url_for('teacherdashboard'))
-    return makeChallenge(map_id, pin)
-
+@app.route('/stopChallenge/<id>')
+def delChallenge(id):
+    return stopChallenge(id)
 
 @app.route('/game/<game_id>')
 def game(game_id):
