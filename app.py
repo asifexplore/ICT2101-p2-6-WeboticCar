@@ -3,6 +3,7 @@ from flask.helpers import send_from_directory
 from init import app
 from controller.userManagement import isTeacher
 from controller.mapControl import createMap, isValidMap, makeChallenge
+from controller.instructionControl import createInstruction, getInstruction
 
 
 @app.route('/')
@@ -41,6 +42,36 @@ def createNewChallenge():
     except:
         return redirect(url_for('teacherdashboard'))
     return makeChallenge(map_id, pin)
+
+@app.route('/createInstructions', methods = ['POST'])
+def createNewInstruction():
+    if request.method == 'POST':
+        try:
+                print('createInstructions', request.json['map_id'])
+                map_id = request.json['map_id']
+                executed = request.json['executed']
+                command = request.json['command']
+                session_id = request.json['session_id']
+
+        except:
+                return redirect(url_for('dashboard'))
+        return createInstruction(map_id, executed, command, session_id)
+
+@app.route('/getInstructions', methods = ['POST'])
+def getNewInstructions():
+    if request.method == 'POST':
+        try:
+                print('getInstructions', request.json['map_id'])
+                print('getInstructions', request.json['session_id'])
+                map_id = request.json['map_id']
+                session_id = request.json['session_id']
+                print("Type of map_id", type(map_id))
+                print("Type of map_id", type(session_id))
+                
+
+        except:
+                return redirect(url_for('dashboard'))
+        return getInstruction(map_id, session_id )
 
 if __name__ == "__main__":
     context = ('cert.pem', 'key.pem')

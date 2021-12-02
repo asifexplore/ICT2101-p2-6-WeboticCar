@@ -32,16 +32,17 @@ class User(db.Model):
 class Instruction(db.Model):
     instruction_id = db.Column(db.Integer, primary_key=True)
     executed = db.Column(db.Boolean)
-    command = db.Column(db.Integer(10))
-    map_id = db.Column(db.Integer(10))
-    session_id = db.Column(db.String(10))
+    command = db.Column(db.Integer)
+    map_id = db.Column(db.Integer)
+    session_id = db.Column(db.String)
 
-    def __init__(self, instruction_id, executed, command, map_id, session_id):
-        self.instruction_id = instruction_id
+    def __init__(self, executed, command, map_id, session_id):
         self.executed = executed
         self.command = command
         self.map_id = map_id
         self.session_id = session_id
+        db.session.add(self)
+        db.session.commit()
         
     def getSesson_id(self):
         return self.session_id
@@ -63,12 +64,9 @@ class Instruction(db.Model):
         self.executed = executed 
         return True 
     
-
-
-    
-    
-
-
+    def getInstructionID(self):
+            return self.instruction_id
+        
 class Map(db.Model):
     map_id = db.Column(db.Integer, primary_key=True)
     one = db.Column(db.String(10))

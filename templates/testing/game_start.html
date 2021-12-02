@@ -3,6 +3,11 @@
 <head>
   <meta charset="utf-8">
   <title>Blockly Demo: Generating JavaScript</title>
+
+      <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+
      <script type=text/javascript src="{{
       url_for('static', filename='js/blockly_compressed.js') }}"></script>
            <script type=text/javascript src="{{
@@ -23,41 +28,51 @@
   </style>
 </head>
 <body>
-  <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
-    <a href="../index.html">Demos</a> &gt; Generating JavaScript</h1>
+  <div class="container">
+    <div class="row">
+      <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
+        <a href="../index.html">Demos</a> &gt; Generating JavaScript</h1>
+    
+      <p>This is a simple demo of generating code from blocks and running
+      the code in a sandboxed JavaScript interpreter.</p>
+    
+      <p>&rarr; More info on <a href="https://developers.google.com/blockly/guides/configure/web/code-generators">Code Generators</a> and <a href="https://developers.google.com/blockly/guides/app-integration/running-javascript">Running JavaScript</a>.</p>
+    
+      <p>
+        <button onclick="showCode()">Show JavaScript</button>
+        <button onclick="runCode()">Run JavaScript</button>
+      </p>
 
-  <p>This is a simple demo of generating code from blocks and running
-  the code in a sandboxed JavaScript interpreter.</p>
+      <div class="col-xs-6" id="div1">
+        
+      </div>
+  
+      <div class="col-xs-6" id="div2">
+        <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
 
-  <p>&rarr; More info on <a href="https://developers.google.com/blockly/guides/configure/web/code-generators">Code Generators</a> and <a href="https://developers.google.com/blockly/guides/app-integration/running-javascript">Running JavaScript</a>.</p>
+        <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+          <block type="move_block" id="^f+eSmxMe^PS7#w+O?(H" x="37" y="38">
+            <field name="movement">1</field>
+          </block>
+          <block type="move_block" id="^f+eSmxMe^PS7#w+O?(H" x="37" y="38">
+            <field name="movement">2</field>
+          </block>
+          <block type="move_block" id="^f+eSmxMe^PS7#w+O?(H" x="37" y="38">
+            <field name="movement">3</field>
+          </block>
+        </xml>
+      
+        <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
+        </xml>
+      </div>
 
-  <p>
-    <button onclick="showCode()">Show JavaScript</button>
-    <button onclick="runCode()">Run JavaScript</button>
-  </p>
 
-  <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
-
-  <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-    <block type="move_block" id="^f+eSmxMe^PS7#w+O?(H" x="37" y="38">
-      <field name="movement">0</field>
-    </block>
-    <block type="move_block" id="^f+eSmxMe^PS7#w+O?(H" x="37" y="38">
-      <field name="movement">1</field>
-    </block>
-    <block type="move_block" id="^f+eSmxMe^PS7#w+O?(H" x="37" y="38">
-      <field name="movement">2</field>
-    </block>
-  </xml>
-
-  <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
-  </xml>
       <script> 
         Blockly.Blocks['move_block'] = {
           init: function() {
             this.appendDummyInput()
                 .appendField("Move Car")
-                .appendField(new Blockly.FieldDropdown([["Straight","0"], ["Left","1"], ["Right","2"]]), "movement");
+                .appendField(new Blockly.FieldDropdown([["Straight","1"], ["Left","2"], ["Right","3"]]), "movement");
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
             this.setColour(230);
@@ -94,23 +109,48 @@
       // Generate JavaScript code and display it.
       Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
       var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
-      console.log("Codes Inputted : " + code);
+      code = code.replace(/(\r\n|\n|\r)/gm, "");
+
+      console.log(code);
       // Axios 
-      // Add into Database
+      axios 
+        .post("/createInstructions", {
+          executed: true, 
+          command : parseInt(code), 
+          map_id : 1, 
+          session_id : 1
+        })
+        .then(function (response) {
+          // Success Then go to next page. 
+          // Redirect to Jonah Page | Change this at a later date.
+          alert("Success, now redirect to Jonah Page")
+          console.log(response)
+          
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert('Error Saving Instructions, Try again later');
+        });
     }
 
     function runCode() {
-      // Generate JavaScript code and run it.
-      window.LoopTrap = 1000;
-      Blockly.JavaScript.INFINITE_LOOP_TRAP =
-          'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
-      var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
-      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-      try {
-        eval(code);
-      } catch (e) {
-        alert(e);
-      }
+      // Axios 
+      axios 
+        .post("/getInstructions", {
+          map_id : 1, 
+          session_id : 1+""
+        })
+        .then(function (response) {
+          // Success Then go to next page. 
+          // Redirect to Jonah Page | Change this at a later date.
+          alert("Success, Data Received")
+          console.log(response)
+          
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert('Error Retriving Instructions, Try again later');
+        });
     }
   </script>
 
