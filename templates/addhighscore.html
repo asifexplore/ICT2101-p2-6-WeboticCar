@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for i, (scoreId, mapId, name, score) in getHighscoretable(request.map_id) %}
+      {% for i, (scoreId, mapId, name, score) in getHighscore(request.map_id) %}
       <tr>
         <th>{{ i }}</th>
         <th>{{ name }}</th>

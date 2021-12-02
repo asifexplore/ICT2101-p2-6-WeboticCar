@@ -6,12 +6,14 @@ from flask_sslify import SSLify
 from sqlalchemy.sql.elements import Null
 from sqlalchemy.sql.operators import nullsfirst_op
 
+
 app = Flask(__name__)
 app.secret_key = "wow_so_secret!"
 
 context = ('cert.pem', 'key.pem')
 sslify = SSLify(app)
 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 db = SQLAlchemy(app)
 db.app = app

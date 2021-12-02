@@ -5,7 +5,7 @@ import uuid
 # -------JS Pop-up with highscore table [addHighscore(commands, time)]-------
 
 
-def getHighscoretable(map_id):
+def getHighscore(map_id):
     highscoreTable = Highscore.query("SELECT * FROM Highscore WHERE map_id = ?;", map_id)
     return highscoreTable
 
