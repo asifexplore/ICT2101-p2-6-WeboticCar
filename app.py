@@ -1,13 +1,31 @@
+
+import pandas as pd
+import sqlite3
 from flask import render_template, url_for, request, redirect
 from flask.helpers import send_from_directory
 from init import app
-from controller.userManagement import redirectTeacher, isTeacher
+from controller.userManagement import userLogin, isTeacher
 from controller.mapControl import createMap, isValidMap, makeChallenge, deleteMap, getGrid
 from controller.instructionControl import createInstruction, getInstruction
+
 
 @app.route('/')
 def index():
     return render_template("landing.html")
+
+@app.route('/teacher', methods=['GET', 'POST'])
+def teacher():
+    if isTeacher():
+        con = sqlite3.connect("database.db")
+        con.row_factory = sqlite3.Row
+
+        cur = con.cursor()
+        cur.execute("select * from map")
+
+        maps = cur.fetchall()
+        return render_template("teacherdashboard.html", maps=maps)
+    else:
+        return render_template("landing.html")
 
 @app.route('/teacherdashboard')
 def teacherdashboard():
@@ -18,6 +36,33 @@ def createNewMap():
     # comment out this line if testing without teacher account
     # if not isTeacher():
     #     return render_template('login.html')
+
+@app.route('/student')
+def student():
+    # con = sqlite3.connect("database.db")
+    # con.row_factory = sqlite3.Row
+    #
+    # cur = con.cursor()
+    # cur.execute("SELECT * FROM challenges WHERE pin IS NOT NULL")
+    #
+    # rows = cur.fetchall();
+    # return render_template("studentdashboard.html", rows=rows)
+    return render_template("studentdashboard.html")
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template("login.html")
+    else:
+        if userLogin(request.form['username'], request.form['password']):
+            return redirect(url_for('teacher'))
+        return render_template("login.html")
+
+# insert code for play challenge here
+@app.route('/playChallenge')
+def playChallenge():
+    return render_template("playchallenge.html")
+
 
 @app.route('/game_start')
 def gameStart():
@@ -51,7 +96,6 @@ def createNewChallenge():
     except:
         return redirect(url_for('teacherdashboard'))
     return makeChallenge(map_id, pin)
-
 
 @app.route('/game/<game_id>')
 def game(game_id):

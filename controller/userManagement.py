@@ -15,4 +15,3 @@ def userLogin(username, password):
 
 def isTeacher():
     return session.get('logged_in')
-    
