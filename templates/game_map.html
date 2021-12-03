@@ -75,31 +75,62 @@
 
 <body>
     <h2>Game</h2>
-    <center>
-        <div class="grid_container">
-            <div class="grid">
-                {% for i in range(1, 11) %}
-                {% for item in game_map[i] %}
-                {% if item == "1" %}
-                <div class="cell road specialBlocks" value="{{ item }}"></div>
-                {% elif item == "2" %}
-                <div class="cell start specialBlocks" value="{{ item }}"></div>
-                {% elif item == "3" %}
-                <div class="cell end specialBlocks" value="{{ item }}"></div>
-                {% else %}
-                <div class="cell" value="{{ item }}"></div>
-                {% endif %}
-                {% endfor %}
-                {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-4">
+                <div class="grid_container">
+                    <div class="grid">
+                        {% for i in range(1, 11) %}
+                        {% for item in game_map[i] %}
+                        {% if item == "1" %}
+                        <div class="cell road specialBlocks" value="{{ item }}"></div>
+                        {% elif item == "2" %}
+                        <div class="cell start specialBlocks" value="{{ item }}"></div>
+                        {% elif item == "3" %}
+                        <div class="cell end specialBlocks" value="{{ item }}"></div>
+                        {% else %}
+                        <div class="cell" value="{{ item }}"></div>
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    <br>
+                    <i class="fa fa-square blocksLegend" style="color: black"><span>Road Block</span></i>
+                    <i class="fa fa-square blocksLegend" style="color: green"><span>Start Block</span></i>
+                    <i class="fa fa-square blocksLegend" style="color: gray"><span>End Block</span></i>
+                </div>
             </div>
+            <div class="col-lg-4" >
+                <div class="grid_container">
+                    <div class="grid">
+                        {% for i in range(1, 11) %}
+                        {% for item in game_map[i] %}
+                        {% if item == "1" %}
+                        <div class="cell road specialBlocks" value="{{ item }}"></div>
+                        {% elif item == "2" %}
+                        <div class="cell start specialBlocks" value="{{ item }}"></div>
+                        {% elif item == "3" %}
+                        <div class="cell end specialBlocks" value="{{ item }}"></div>
+                        {% else %}
+                        <div class="cell" value="{{ item }}"></div>
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    <br>
+                    <i class="fa fa-square blocksLegend" style="color: black"><span>Road Block</span></i>
+                    <i class="fa fa-square blocksLegend" style="color: green"><span>Start Block</span></i>
+                    <i class="fa fa-square blocksLegend" style="color: gray"><span>End Block</span></i>
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
         </div>
-        <div>
-            <br>
-            <i class="fa fa-square blocksLegend" style="color: black"><span>Road Block</span></i>
-            <i class="fa fa-square blocksLegend" style="color: green"><span>Start Block</span></i>
-            <i class="fa fa-square blocksLegend" style="color: gray"><span>End Block</span></i>
-        </div>
-    </center>
+    </div>
 </body>
 
 </html>
