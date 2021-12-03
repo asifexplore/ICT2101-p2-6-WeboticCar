@@ -15,7 +15,7 @@ db.app = app
 
 def commit():
     db.session.commit()
-    return
+    return 
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -41,11 +41,12 @@ class Cars(db.Model):
         self.ip_addr = Null
         self.token = Null
 
-class Highscore(db.Model):
-    score_id = db.column(db.Integer, primary_key=True, unique=True)
-    map_id = db.column(db.Integer)
-    name = db.column(db.String(10))
-    score = db.Column(db.Integer)
+
+#class Highscore(db.Model):
+#    score_id = db.column(db.Integer, primary_key=True, unique=True)
+#    map_id = db.column(db.Integer)
+#    name = db.column(db.String(10))
+#    score = db.Column(db.Integer)
 
 
 class Map(db.Model):
