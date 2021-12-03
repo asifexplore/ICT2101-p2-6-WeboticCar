@@ -30,4 +30,3 @@ def isValidMap(form):
     for each in requirements:
         if each not in form:
             return False
-    return True

@@ -29,6 +29,23 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.id
 
+class Cars(db.Model):
+    car_id = db.Column(db.Integer, primary_key=True)
+    car_pass = db.Column(db.String(80))
+    ip_addr = db.Column(db.String(15), nullable = True)
+    token = db.Column(db.String(32), nullable = True)
+
+    def __init__(self, car_id, car_pass):
+        self.car_id = car_id
+        self.car_pass = car_pass
+        self.ip_addr = Null
+        self.token = Null
+
+class Highscore(db.Model):
+    score_id = db.column(db.Integer, primary_key=True, unique=True)
+    map_id = db.column(db.Integer)
+    name = db.column(db.String(10))
+    score = db.Column(db.Integer)
 
 
 class Map(db.Model):
@@ -39,9 +56,45 @@ class Map(db.Model):
 
     def __init__(self, grid, name):
         self.grid=grid
-        self.name = name
+        
+class Instruction(db.Model):
+    instruction_id = db.Column(db.Integer, primary_key=True)
+    executed = db.Column(db.Boolean)
+    command = db.Column(db.Integer)
+    map_id = db.Column(db.Integer)
+    session_id = db.Column(db.String)
+
+    def __init__(self, executed, command, map_id, session_id):
+        self.executed = executed
+        self.command = command
+        self.map_id = map_id
+        self.session_id = session_id
         db.session.add(self)
         db.session.commit()
+        
+    def getSesson_id(self):
+        return self.session_id
+    
+    def getCommand(self):
+        return self.command
+
+    def setCommand(self, commands:int) -> bool:
+        self.command = commands 
+        return True 
+
+    def getMap_id(self):
+        return self.map_id
+
+    def getExecued(self):
+        return self.executed
+    
+    def setExecuted(self, executed:bool) -> bool:
+        self.executed = executed 
+        return True 
+    
+    def getInstructionID(self):
+            return self.instruction_id
+        
 
     def __repr__(self):
         return '<Map %r>' % self.map_id
@@ -49,11 +102,13 @@ class Map(db.Model):
     def setPIN(self, pin: int) -> bool:
         self.pin = pin
         return True
+        
     def clearPIN(self):
         self.pin = Null
 
     def clearChallenge(self) -> bool:
         self.pin = Null
         return True
+
 
 db.create_all()
