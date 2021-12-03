@@ -1,7 +1,7 @@
 from flask import render_template, url_for, request, redirect
 from flask.helpers import send_from_directory
 from init import app
-from controller.userManagement import redirectTeacher, isTeacher
+from controller.userManagement import userLogin, isTeacher
 from controller.mapControl import createMap, isValidMap, makeChallenge, deleteMap, getGrid
 from controller.instructionControl import createInstruction, getInstruction
 
