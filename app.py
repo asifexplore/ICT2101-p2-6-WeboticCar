@@ -18,6 +18,9 @@ def createNewMap():
 @app.route('/game_start')
 def gameStart():
     return render_template("testing/game_start.html")
+@app.route('/game_lobby')
+def gameLobby():
+    return render_template("testing/game_lobby.html")
 # Routing Background Sounds 
 @app.route('/media/<path:filename>')
 def download_file(filename):

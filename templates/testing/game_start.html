@@ -101,7 +101,7 @@
   <script>
     var demoWorkspace = Blockly.inject('blocklyDiv',
         {media: '../../media/',
-         toolbox: document.getElementById('toolbox')});
+         toolbox: document.getElementById('toolbox'), trashcan: true });
     Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
                                demoWorkspace);
 
