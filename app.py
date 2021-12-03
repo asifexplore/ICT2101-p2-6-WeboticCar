@@ -1,4 +1,3 @@
-
 import pandas as pd
 import sqlite3
 from flask import render_template, url_for, request, redirect
@@ -35,8 +34,8 @@ def teacherdashboard():
 def createNewMap():
     # comment out this line if testing without teacher account
     # if not isTeacher():
-    #     return render_template('login.html')
-
+    return render_template('login.html')
+    
 @app.route('/student')
 def student():
     # con = sqlite3.connect("database.db")
