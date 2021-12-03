@@ -2,10 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from flask_sslify import SSLify
 import sqlalchemy
-from sqlalchemy.sql.elements import Null
 from random import randint
-
-from sqlalchemy.sql.operators import nullslast_op
 
 app = Flask(__name__)
 app.secret_key = "wow_so_secret!"

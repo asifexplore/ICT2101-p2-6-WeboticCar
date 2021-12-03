@@ -1,7 +1,9 @@
 from flask import render_template, url_for, request, redirect
 from init import app
 from controller.userManagement import redirectTeacher
-from controller.mapControl import createMap, isValidMap, makeChallenge, stopChallenge, deleteMap, getGrid
+from controller.challengeControl import makeChallenge, stopChallenge
+from controller.mapControl import createMap, isValidMap, deleteMap, getGrid
+from api.currentMap import getCurrentMap
 
 @app.route('/')
 def index():
@@ -43,6 +45,9 @@ def delChallenge(id):
 def game(game_id):
     return render_template("game_map.html", game_map=getGrid(game_id))
     
+@app.route('/api/currentmap/<id>')
+def currMap(id):
+    return getCurrentMap(id)
 
 if __name__ == "__main__":
     context = ('cert.pem', 'key.pem')
