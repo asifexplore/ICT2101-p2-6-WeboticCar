@@ -77,4 +77,4 @@ Once it is bug and error free, it will be commited to the Development branch.
 
 
 ### Whitebox Testing ###
-animated gif or short one min video
+https://www.youtube.com/watch?v=rJPwhNLYSSk
