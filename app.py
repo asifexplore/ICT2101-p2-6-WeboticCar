@@ -1,8 +1,6 @@
-import pandas as pd
-import sqlite3
 from flask import render_template, url_for, request, redirect
-from flask.helpers import send_from_directory
 from init import app
+
 from controller.userManagement import userLogin, isTeacher , redirectTeacher
 from controller.challengeControl import makeChallenge, stopChallenge
 from controller.mapControl import createMap, deleteMap, getGrid, isValidMap, makeChallenge
@@ -98,15 +96,6 @@ def gameLobby():
 @app.route('/media/<path:filename>')
 def download_file(filename):
     return send_from_directory("media/",filename)
-    if request.method == 'GET':
-        return createMap(0)
-    elif request.method == 'POST':
-        form = request.form
-        if(isValidMap(form)):
-            return createMap(form)
-        else:
-            redirect(url_for('createNewMap'))
-
 
 @app.route('/game/<game_id>')
 def game(game_id):
@@ -144,6 +133,9 @@ def getNewInstructions():
         except:
                 return redirect(url_for('dashboard'))
         return getInstruction(map_id, session_id )
+
+def currMap(id):
+    return getCurrentMap(id)
 
 if __name__ == "__main__":
     context = ('cert.pem', 'key.pem')
