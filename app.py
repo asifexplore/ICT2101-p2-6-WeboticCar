@@ -7,6 +7,9 @@ from controller.mapControl import createMap, deleteMap, getGrid, isValidMap, mak
 from controller.instructionControl import createInstruction, getInstruction
 from currentMap import getCurrentMap
 
+import sqlite3
+
+
 @app.route('/')
 def index():
     return render_template("landing.html")
