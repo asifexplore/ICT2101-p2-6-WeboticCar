@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 {% endblock %}
 
-{% block body %}
+{% block main %}
     <div class="container">
         <table class="table table-striped bg-light">
             <tr>
@@ -20,21 +20,19 @@
                 <th>PIN</th>
                 <th>Actions</th>
             </tr>
-            <tr>
-                <td>{{ challenge.name }}</td>
-                <td>{{ challenge.pin }}</td>
-                <td>
-                    <a href="{{ url_for('delChallenge', id=challenge.map_id)}}">End Challenge</a>
-                </td>
-            </tr>
+{#            uncomment when have 'challenge' table in db.#}
+{#            <tr>#}
+{#                <td>{{ challenge.name }}</td>#}
+{#                <td>{{ challenge.pin }}</td>#}
+{#                <td>#}
+{#                    <a href="{{ url_for('delChallenge', id=challenge.map_id)}}">End Challenge</a>#}
+{#                </td>#}
+{#            </tr>#}
         </table>
     </div>
 
     <div class="container">
         <table class="table table-striped bg-light">
-            <tr>
-                <a href="{{ url_for('createNewMap') }}">Create New Map</a>
-            </tr>
             <tr>
                 <th>Map</th>
                 <th colspan="2">Actions</th>
@@ -50,7 +48,7 @@
                         <a href="{{ url_for('createChallenge', id=map.map_id) }}">Create Challenge</a>
                     </td>
                 </tr>
-            {% endfor %}
+            {%  endfor %}
         </table>
     </div>
 {% endblock %}

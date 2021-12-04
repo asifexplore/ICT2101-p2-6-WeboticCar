@@ -40,27 +40,25 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ 'active' if active_page == 'map' else '' }}" href="/createMap">
+            <a class="nav-link" href="{{ url_for('createNewMap') }}">
               <span data-feather="map"></span>
               Create Map
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{ 'active' if active_page == 'challenge' else '' }}" href="/challenge">
-              <span data-feather="layers"></span>
-                Create Challenge
             </a>
           </li>
         </ul>
       </div>
     </nav>
     {% block main %}{%endblock%}
+
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
+
+      <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
     <!-- Datatables JavaScript -->
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>

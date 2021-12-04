@@ -52,7 +52,7 @@ def delMap(id):
     return deleteMap(id)
 
 @app.route('/createChallenge', methods = ['POST', 'GET'])
-def createNewChallenge():
+def createChallenge():
     try:
         map_id = request.form['map_id']
         pin = request.form['pin']
