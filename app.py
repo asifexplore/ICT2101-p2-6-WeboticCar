@@ -1,17 +1,26 @@
 from flask import render_template, url_for, request, redirect
 from init import app
-from controller.userManagement import redirectTeacher
+from controller.userManagement import redirectTeacher, userLogin
 from controller.challengeControl import makeChallenge, stopChallenge
 from controller.mapControl import createMap, isValidMap, deleteMap, getGrid
-from api.currentMap import getCurrentMap
+# from api.currentMap import getCurrentMap
 
 @app.route('/')
 def index():
     return render_template("landing.html")
 
-@app.route('/teacherdashboard')
+@app.route('/teacher')
 def teacherdashboard():
     return redirectTeacher()
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template("login.html")
+    else:
+        if userLogin(request.form['username'], request.form['password']):
+            return redirect(url_for('teacherdashboard'))
+        return render_template("login.html")
 
 @app.route('/createMap', methods=['GET', 'POST'])
 def createNewMap():
@@ -45,9 +54,9 @@ def delChallenge(id):
 def game(game_id):
     return render_template("game_map.html", game_map=getGrid(game_id))
     
-@app.route('/api/currentmap/<id>')
-def currMap(id):
-    return getCurrentMap(id)
+# @app.route('/api/currentmap/<id>')
+# def currMap(id):
+#     return getCurrentMap(id)
 
 if __name__ == "__main__":
     context = ('cert.pem', 'key.pem')

@@ -6,10 +6,11 @@ from controller.mapControl import getMaps
 from controller.challengeControl import getChallenge
 
 
-    
 def userLogin(username, password):
     user_found = User.query.filter_by(username=username).first()
+
     if user_found:
+        user_found.password = pbkdf2_sha256.encrypt(password)
         if pbkdf2_sha256.verify(password, user_found.password):
             session['logged_in'] = True
             return True
