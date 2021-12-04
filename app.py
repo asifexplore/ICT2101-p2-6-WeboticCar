@@ -5,7 +5,7 @@ from controller.userManagement import userLogin, isTeacher , redirectTeacher
 from controller.challengeControl import makeChallenge, stopChallenge
 from controller.mapControl import createMap, deleteMap, getGrid, isValidMap, makeChallenge
 from controller.instructionControl import createInstruction, getInstruction
-from api.currentMap import getCurrentMap
+from currentMap import getCurrentMap
 
 @app.route('/')
 def index():
@@ -62,9 +62,8 @@ def createChallenge():
 @app.route('/playChallenge')
 def playChallenge():
     return render_template("playchallenge.html")
-
-     
-@app.route('/student')
+ 
+@app.route('/student', methods=['GET', 'POST'])
 def student():
     # con = sqlite3.connect("database.db")
     # con.row_factory = sqlite3.Row
@@ -74,7 +73,14 @@ def student():
     #
     # rows = cur.fetchall();
     # return render_template("studentdashboard.html", rows=rows)
-    return render_template("studentdashboard.html")
+
+    if request.method == 'GET':
+        return render_template("studentdashboard.html")
+    else:
+        pin = request.form['pin']
+        if pin != '':
+            return redirect(url_for('gameLobby'))
+        return render_template("studentdashboard.html")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

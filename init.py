@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from flask_sslify import SSLify
 import sqlalchemy
+from sqlalchemy.sql.elements import Null
 from random import randint
 
 app = Flask(__name__)
@@ -30,7 +31,43 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.id
 
+class Instruction(db.Model):
+    instruction_id = db.Column(db.Integer, primary_key=True)
+    executed = db.Column(db.Boolean)
+    command = db.Column(db.Integer)
+    map_id = db.Column(db.Integer)
+    session_id = db.Column(db.String)
 
+    def __init__(self, executed, command, map_id, session_id):
+        self.executed = executed
+        self.command = command
+        self.map_id = map_id
+        self.session_id = session_id
+        db.session.add(self)
+        db.session.commit()
+        
+    def getSesson_id(self):
+        return self.session_id
+    
+    def getCommand(self):
+        return self.command
+
+    def setCommand(self, commands:int) -> bool:
+        self.command = commands 
+        return True 
+
+    def getMap_id(self):
+        return self.map_id
+
+    def getExecued(self):
+        return self.executed
+    
+    def setExecuted(self, executed:bool) -> bool:
+        self.executed = executed 
+        return True 
+    
+    def getInstructionID(self):
+            return self.instruction_id
 
 class Map(db.Model):
     map_id = db.Column(db.Integer, primary_key=True)
