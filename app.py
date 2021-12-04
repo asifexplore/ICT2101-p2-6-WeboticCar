@@ -7,7 +7,7 @@ from controller.userManagement import userLogin, isTeacher , redirectTeacher
 from controller.challengeControl import makeChallenge, stopChallenge
 from controller.mapControl import createMap, deleteMap, getGrid, isValidMap, makeChallenge
 from controller.instructionControl import createInstruction, getInstruction
-
+from api.currentMap import getCurrentMap
 
 @app.route('/')
 def index():
@@ -111,6 +111,10 @@ def download_file(filename):
 @app.route('/game/<game_id>')
 def game(game_id):
     return render_template("game_map.html", game_map=getGrid(game_id))
+ 
+@app.route('/api/currentmap/<id>')
+def currMap(id):
+    return getCurrentMap(id)
     
 @app.route('/createInstructions', methods = ['POST', 'GET'])
 def createNewInstruction():
