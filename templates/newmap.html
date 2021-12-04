@@ -1,9 +1,9 @@
 <!--page for drawing new map-->
+{% extends 'base.html' %} {% block head %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/map.css')}}">
 <script src="{{url_for('static', filename='js/map.js')}}"></script>
 
-{% extends 'base.html' %} {% block head %}
 <title>Create Map</title>
 {% endblock %} {% block body %}
 <table>
@@ -129,19 +129,9 @@
     </tr>
 </table>
 <form action="/createMap" id=mapform method="POST">
-    <input type="hidden" id="one" name="one" value="" />
-    <input type="hidden" id="two" name="two" value="" />
-    <input type="hidden" id="three" name="three" value="" />
-    <input type="hidden" id="four" name="four" value="" />
-    <input type="hidden" id="five" name="five" value="" />
-    <input type="hidden" id="six" name="six" value="" />
-    <input type="hidden" id="seven" name="seven" value="" />
-    <input type="hidden" id="eight" name="eight" value="" />
-    <input type="hidden" id="nine" name="nine" value="" />
-    <input type="hidden" id="ten" name="ten" value="" />
+    <input type="hidden" id="grid" name="grid" value="" />
     <input type="text" id="mname" name="name" />
     <input type="button" id="createBtn" value="Create" />
 </form>
+
 {% endblock %}
-
-

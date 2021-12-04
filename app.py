@@ -4,6 +4,7 @@ from flask import render_template, url_for, request, redirect
 from flask.helpers import send_from_directory
 from init import app
 from controller.userManagement import userLogin, isTeacher , redirectTeacher
+from controller.challengeControl import makeChallenge, stopChallenge
 from controller.mapControl import createMap, deleteMap, getGrid, isValidMap, makeChallenge
 from controller.instructionControl import createInstruction, getInstruction
 
@@ -11,6 +12,26 @@ from controller.instructionControl import createInstruction, getInstruction
 @app.route('/')
 def index():
     return render_template("landing.html")
+
+@app.route('/teacherdashboard')
+def teacherdashboard():
+    return redirectTeacher()
+
+@app.route('/createMap', methods=['GET', 'POST'])
+def createNewMap():
+    # comment out this line if testing without teacher account
+    # if not isTeacher():
+    #     return render_template('login.html')
+
+     if request.method == 'GET':
+        return createMap(0)
+     elif request.method == 'POST':
+        form = request.form
+
+        if(isValidMap(form)):
+            return createMap(form)
+        else:
+            redirect(url_for('createNewMap'))
 
 @app.route('/teacher', methods=['GET', 'POST'])
 def teacher():
@@ -26,16 +47,24 @@ def teacher():
     else:
         return render_template("landing.html")
 
-@app.route('/teacherdashboard')
-def teacherdashboard():
-    return redirectTeacher()
+@app.route('/deleteMap/<id>')
+def delMap(id):
+    return deleteMap(id)
 
-@app.route('/createMap', methods=['GET', 'POST'])
-def createNewMap():
-    # comment out this line if testing without teacher account
-    # if not isTeacher():
-    # return render_template('login.html')
-    return render_template('newmap.html') # For Testing purposes
+@app.route('/createChallenge', methods = ['POST', 'GET'])
+def createNewChallenge():
+    try:
+        map_id = request.form['map_id']
+        pin = request.form['pin']
+    except:
+        return redirect(url_for('teacherdashboard'))
+    return makeChallenge(map_id, pin)
+
+# insert code for play challenge here
+@app.route('/playChallenge')
+def playChallenge():
+    return render_template("playchallenge.html")
+
      
 @app.route('/student')
 def student():
@@ -58,12 +87,6 @@ def login():
             return redirect(url_for('teacher'))
         return render_template("login.html")
 
-# insert code for play challenge here
-@app.route('/playChallenge')
-def playChallenge():
-    return render_template("playchallenge.html")
-
-
 @app.route('/game_start')
 def gameStart():
     return render_template("testing/game_start.html")
@@ -84,18 +107,6 @@ def download_file(filename):
         else:
             redirect(url_for('createNewMap'))
 
-@app.route('/deleteMap/<id>')
-def delMap(id):
-    return deleteMap(id)
-
-@app.route('/createChallenge', methods = ['POST', 'GET'])
-def createNewChallenge():
-    try:
-        map_id = request.form['map_id']
-        pin = request.form['pin']
-    except:
-        return redirect(url_for('teacherdashboard'))
-    return makeChallenge(map_id, pin)
 
 @app.route('/game/<game_id>')
 def game(game_id):
