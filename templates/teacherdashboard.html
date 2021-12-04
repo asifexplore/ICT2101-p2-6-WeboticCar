@@ -8,28 +8,49 @@
           crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 {% endblock %}
-<body>
 
-{% block main %}
+{% block body %}
     <div class="container">
         <table class="table table-striped bg-light">
             <tr>
-                <th>map_id</th>
-                <th>name</th>
-                <th>pin</th>
-                <th></th>
+                <h1>Open Challenge</h1>
+            </tr>
+            <tr>
+                <th>Map</th>
+                <th>PIN</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td>{{ challenge.name }}</td>
+                <td>{{ challenge.pin }}</td>
+                <td>
+                    <a href="{{ url_for('delChallenge', id=challenge.map_id)}}">End Challenge</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container">
+        <table class="table table-striped bg-light">
+            <tr>
+                <a href="{{ url_for('createNewMap') }}">Create New Map</a>
+            </tr>
+            <tr>
+                <th>Map</th>
+                <th colspan="2">Actions</th>
             </tr>
             {% for map in maps %}
                 <tr>
-                    <td>{{ map.map_id }}</td>
                     <td>{{ map.name }}</td>
-                    <td>{{ map.pin }}</td>
                     <td>
-                        <a href="/editmap/{{ map.map_id }}" class="btn">Edit</a>
+                        <a href="{{ url_for('delMap', id=map.map_id) }}">Delete</a>
+                    </td>
+                    
+                    <td>
+                        <a href="{{ url_for('createChallenge', id=map.map_id) }}">Create Challenge</a>
                     </td>
                 </tr>
-            {%  endfor %}
+            {% endfor %}
         </table>
     </div>
 {% endblock %}
-</body>

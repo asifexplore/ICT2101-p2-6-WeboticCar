@@ -3,8 +3,8 @@ import sqlite3
 from flask import render_template, url_for, request, redirect
 from flask.helpers import send_from_directory
 from init import app
-from controller.userManagement import userLogin, isTeacher
-from controller.mapControl import createMap, isValidMap, makeChallenge
+from controller.userManagement import userLogin, isTeacher , redirectTeacher
+from controller.mapControl import createMap, deleteMap, getGrid, isValidMap, makeChallenge
 from controller.instructionControl import createInstruction, getInstruction
 
 
@@ -34,8 +34,9 @@ def teacherdashboard():
 def createNewMap():
     # comment out this line if testing without teacher account
     # if not isTeacher():
-    return render_template('login.html')
-    
+    # return render_template('login.html')
+    return render_template('newmap.html') # For Testing purposes
+     
 @app.route('/student')
 def student():
     # con = sqlite3.connect("database.db")
@@ -87,7 +88,7 @@ def download_file(filename):
 def delMap(id):
     return deleteMap(id)
 
-@app.route('/createChallenge', methods = ['POST'])
+@app.route('/createChallenge', methods = ['POST', 'GET'])
 def createNewChallenge():
     try:
         map_id = request.form['map_id']
@@ -100,7 +101,7 @@ def createNewChallenge():
 def game(game_id):
     return render_template("game_map.html", game_map=getGrid(game_id))
     
-@app.route('/createInstructions', methods = ['POST'])
+@app.route('/createInstructions', methods = ['POST', 'GET'])
 def createNewInstruction():
     if request.method == 'POST':
         try:

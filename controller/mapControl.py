@@ -14,6 +14,14 @@ def createMap(map):
     #display dashboard, maybe can include argv to show banner saying map craeted
     return render_template("teacherdashboard.html")
 
+def deleteMap(id: int):
+    try:
+        Map.query.filter_by(map_id=id).delete()
+        commit()
+        return redirect(url_for('teacherdashboard', message="Map Deleted"))
+    except:
+        return redirect(url_for('teacherdashboard', message="An Error has Occured"))
+
 def makeChallenge(map_id: int, pin: int):
     status = False
     if getMap(map_id).setPIN(pin):
@@ -24,6 +32,12 @@ def makeChallenge(map_id: int, pin: int):
 
 def getMap(id: int) -> Map:
     return Map.query.filter_by(map_id=id).first()
+
+def getMaps():
+    return Map.query.all()
+
+def getGrid(map_id: int) -> str:
+    return getMap(map_id).grid
 
 def isValidMap(form):
     requirements = ["one", "two", "three", "four", "five", "six", "seven","eight","nine","ten","name"]
