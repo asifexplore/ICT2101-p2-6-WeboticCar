@@ -82,9 +82,16 @@ class Cars(db.Model):
         self.token = Null
 
 class Highscore(db.Model):
-    score_id = db.Column(db.Integer, primary_key=True, unique=True)
+    score_id = db.Column(db.Integer, primary_key=True)
     map_id = db.Column(db.Integer)
     name = db.Column(db.String(10))
     score = db.Column(db.Integer)
+
+    def __init__(self, map_id, name, score):
+        self.map_id = map_id
+        self.name = name
+        self.score = score
+        db.session.add(self)
+        db.session.commit()
 
 db.create_all()

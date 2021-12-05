@@ -45,29 +45,38 @@ def endgame():
         mapId = 3
         detailsTable = getHighscore(mapId)
         if checkHighscore(score,detailsTable):
-            redirect(url_for('challengecompleted'))
+            redirect(url_for('challengeCompleted'))
         else:
-            redirect(url_for('addHighscore'))
+            redirect(url_for('challengeCompleted'))
 
-@app.route('/addHighscore', methods = ['GET', 'POST'])
+@app.route('/addHighscore', methods = ['GET'])
 def addHighscore():
+    return render_template('addhighscore.html')
+
+@app.route('/sethighscore', methods = ['POST'])
+def sethighscore():
     mapId = 3
     score = 3000
-    detailsTable = getHighscore(mapId)
-    setHighscore(score, request.username, detailsTable)
-    return render_template("addhighscore.html")
+    if request.method == 'POST':
+        name = request.form['username']
+        setHighscore(mapId, name, score)
+        # detailsTable = getHighscore(mapId)
+        return redirect(f'viewhighscore/{mapId}')
 
-# @app.route('/viewhighscore')
-# def viewhighscore():
-#     getHighscoretable(request.map_id)
+@app.route('/viewhighscore/<mapId>', methods = ['GET'])
+def viewhighscore(mapId):
+    mapId = 1
+    detailsTable = getHighscore(mapId)
+    return render_template("viewhighscore.html", detailsTable = detailsTable)
 
 @app.route('/challengeCompleted')
 def challengeCompleted():
-    return render_template("challengeCompleted.html")
+    return render_template('challengeCompleted.html') # render_template("challengeCompleted.html")
 
 @app.route('/gameOver')
 def gameOver():
-    return render_template("gameOver.html")
+    # score_id, map_id, name, score= getHighscore(1)
+    return getHighscore(1)# render_template("gameOver.html")
 
 if __name__ == "__main__":
     context = ('cert.pem', 'key.pem')
