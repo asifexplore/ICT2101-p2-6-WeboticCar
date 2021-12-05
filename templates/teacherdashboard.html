@@ -1,1 +1,52 @@
-<!--teacher dashboard here-->
+{% extends 'dashboard.html' %}
+
+{% block head %}
+{% block title %}Webotic Car - Teacher {% endblock %}
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <table class="table table-striped bg-light">
+            <tr>
+                <h1>Open Challenge</h1>
+            </tr>
+            <tr>
+                <th>Map</th>
+                <th>PIN</th>
+                <th>Actions</th>
+            </tr>
+{#            uncomment when have 'challenge' table in db.#}
+{#            <tr>#}
+{#                <td>{{ challenge.name }}</td>#}
+{#                <td>{{ challenge.pin }}</td>#}
+{#                <td>#}
+{#                    <a href="{{ url_for('delChallenge', id=challenge.map_id)}}">End Challenge</a>#}
+{#                </td>#}
+{#            </tr>#}
+        </table>
+    
+        <table class="table table-striped bg-light">
+            <tr>
+                <th>Map</th>
+                <th colspan="2">Actions</th>
+            </tr>
+            {% for map in maps %}
+                <tr>
+                    <td>{{ map.name }}</td>
+                    <td>
+                        <a href="{{ url_for('delMap', id=map.map_id) }}">Delete</a>
+                    </td>
+                    
+                    <td>
+                        <a href="{{ url_for('createChallenge', id=map.map_id) }}">Create Challenge</a>
+                    </td>
+                </tr>
+            {%  endfor %}
+        </table>
+    </div>
+{% endblock %}
