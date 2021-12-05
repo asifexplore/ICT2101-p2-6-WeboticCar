@@ -5,11 +5,7 @@ from flask import Flask
 from flask_sslify import SSLify
 import sqlalchemy
 from sqlalchemy.sql.elements import Null
-<<<<<<< HEAD
-from sqlalchemy.sql.operators import nullsfirst_op
-=======
 from random import randint
->>>>>>> Development-Integration-(Marven-and-Kok-Hwee)
 
 app = Flask(__name__)
 app.secret_key = "wow_so_secret!"
@@ -29,35 +25,16 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(80))
-    role = db.Column(db.Integer)
+#    role = db.Column(db.Integer)
     
     def __init__(self, username, password):
         self.username = username
         self.password = password
-        self.role = role
+#        self.role = role
 
     def __repr__(self):
         return '<User %r>' % self.id
 
-<<<<<<< HEAD
-class Cars(db.Model):
-    car_id = db.Column(db.Integer, primary_key=True)
-    car_pass = db.Column(db.String(80))
-    ip_addr = db.Column(db.String(15), nullable = True)
-    token = db.Column(db.String(32), nullable = True)
-
-    def __init__(self, car_id, car_pass):
-        self.car_id = car_id
-        self.car_pass = car_pass
-        self.ip_addr = Null
-        self.token = Null
-
-class Highscore(db.Model):
-    score_id = db.column(db.Integer, primary_key=True, unique=True)
-    map_id = db.column(db.Integer)
-    name = db.column(db.String(10))
-    score = db.Column(db.Integer)
-=======
 class carData(db.Model):
     car_id = db.Column(db.Integer, primary_key=True)
     distance = db.Column(db.Integer)
@@ -118,7 +95,6 @@ class Instruction(db.Model):
     
     def getInstructionID(self):
             return self.instruction_id
->>>>>>> Development-Integration-(Marven-and-Kok-Hwee)
 
 class Map(db.Model):
     map_id = db.Column(db.Integer, primary_key=True)
@@ -132,7 +108,7 @@ class Map(db.Model):
         self.pin = None
         db.session.add(self)
         db.session.commit()
-s
+
     def __repr__(self):
         return '<Map %r>' % self.map_id
 
@@ -140,19 +116,10 @@ s
         self.pin = randint(1000,9999)        
         db.session.commit()
         return True
-<<<<<<< HEAD
-    def clearPIN(self):
-        self.pin = Null
-
-    def clearChallenge(self) -> bool:
-        self.pin = Null
-        return Trues
-=======
 
     def clearPIN(self) -> bool:
         self.pin = sqlalchemy.null()
         db.session.commit()
         return True
->>>>>>> Development-Integration-(Marven-and-Kok-Hwee)
 
 db.create_all()

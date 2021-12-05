@@ -17,13 +17,9 @@ def userLogin(username, password):
         return False
 
 def isTeacher():
-<<<<<<< HEAD
-    return session.get('logged_in')
-=======
     return session.get('logged_in')
 
 def redirectTeacher():
     if isTeacher():
         return render_template("teacherdashboard.html")
     return render_template("teacherdashboard.html", maps = getMaps(), challenge = getChallenge())
->>>>>>> Development-Integration-(Marven-and-Kok-Hwee)

@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-# Command and executed should be stack/queue
-def setExecuted(self, executed):
-    self.executed += executed
-
-def getExecuted(self):
-        return self.executed
-    
-def setCommand(self):
-    self
-
-def getCommand(self):
-    return self.commands, self.time
-
-def setScore(self, commands, time):
-    self.commands = commands
-    self.time = time
-    # self.score = calculate score with commands and time
-        
-def getScore(self):
-    return self.commands, self.time
-=======
 from flask import jsonify
 from flask.globals import session
 from flask.helpers import url_for
@@ -74,4 +52,3 @@ def getCarData():
     print(testing[0])
 
     return jsonify({"Result":"Success", "car_id":testing[0][0], "distance":testing[0][1], "speed": testing[0][2] })
->>>>>>> Development-Integration-(Marven-and-Kok-Hwee)

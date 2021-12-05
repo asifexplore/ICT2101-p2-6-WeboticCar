@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-sfrom flask.helpers import url_for
-=======
 from flask.helpers import url_for
->>>>>>> Development-Integration-(Marven-and-Kok-Hwee)
 from flask.templating import render_template
 from werkzeug.utils import redirect
 from init import Map,commit
@@ -40,9 +36,6 @@ def isValidMap(form):
     for each in requirements:
         if each not in form:
             return False
-<<<<<<< HEAD
-    return True
-=======
     return True
 
 def makeChallenge(map_id: int, pin: int):
@@ -55,4 +48,3 @@ def makeChallenge(map_id: int, pin: int):
 
 
 
->>>>>>> Development-Integration-(Marven-and-Kok-Hwee)

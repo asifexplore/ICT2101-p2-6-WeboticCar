@@ -1,9 +1,5 @@
 from flask import render_template, url_for, request, redirect
 from init import app
-<<<<<<< HEAD
-from controller.userManagement import redirectTeacher
-from controller.mapControl import createMap, isValidMap, makeChallenge, deleteMap, getGrid
-=======
 
 from controller.userManagement import userLogin, isTeacher , redirectTeacher
 from controller.challengeControl import makeChallenge, stopChallenge
@@ -14,7 +10,6 @@ from controller.apiManagement import getCarInstruction, getCarData, setCarData
 
 import sqlite3
 
->>>>>>> Development-Integration-(Marven-and-Kok-Hwee)
 
 @app.route('/')
 def index():
@@ -39,8 +34,6 @@ def createNewMap():
             return createMap(form)
         else:
             redirect(url_for('createNewMap'))
-<<<<<<< HEAD
-=======
 
 @app.route('/teacher', methods=['GET', 'POST'])
 def teacher():
@@ -85,7 +78,6 @@ def setCarStatus():
         return "Error: No id field provided. Please specify an id."
     print(type(distance))
     return setCarData(distance)
->>>>>>> Development-Integration-(Marven-and-Kok-Hwee)
 
 @app.route('/deleteMap/<id>')
 def delMap(id):
@@ -175,8 +167,6 @@ def getNewInstructions():
                 return redirect(url_for('dashboard'))
         return getInstruction(map_id, session_id )
     
-<<<<<<< HEAD
-=======
 @app.route('/game_start')
 def gameStart():
     return render_template("game/game_start.html")
@@ -190,7 +180,6 @@ def start_gameLobby():
 
 def currMap(id):
     return getCurrentMap(id)
->>>>>>> Development-Integration-(Marven-and-Kok-Hwee)
 
 if __name__ == "__main__":
     context = ('cert.pem', 'key.pem')
