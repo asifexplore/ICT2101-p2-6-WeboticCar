@@ -4,7 +4,7 @@ from init import app
 from controller.userManagement import userLogin, isTeacher , redirectTeacher
 from controller.challengeControl import makeChallenge, stopChallenge
 from controller.mapControl import createMap, deleteMap, getGrid, isValidMap, makeChallenge
-from controller.instructionControl import createInstruction, getInstruction
+from controller.instructionControl import setInstruction, getInstruction
 from currentMap import getCurrentMap
 
 import sqlite3
@@ -93,14 +93,7 @@ def login():
         if userLogin(request.form['username'], request.form['password']):
             return redirect(url_for('teacher'))
         return render_template("login.html")
-
-@app.route('/game_start')
-def gameStart():
-    return render_template("testing/game_start.html")
-@app.route('/game_lobby')
-def gameLobby():
-    return render_template("testing/game_lobby.html")
-    
+  
 # Routing Background Sounds 
 @app.route('/media/<path:filename>')
 def download_file(filename):
@@ -114,7 +107,7 @@ def game(game_id):
 def currMap(id):
     return getCurrentMap(id)
     
-@app.route('/createInstructions', methods = ['POST', 'GET'])
+@app.route('/createInstructions', methods = ['POST'])
 def createNewInstruction():
     if request.method == 'POST':
         try:
@@ -126,7 +119,7 @@ def createNewInstruction():
 
         except:
                 return redirect(url_for('dashboard'))
-        return createInstruction(map_id, executed, command, session_id)
+        return setInstruction(map_id, executed, command, session_id)
 
 @app.route('/getInstructions', methods = ['POST'])
 def getNewInstructions():
@@ -142,6 +135,21 @@ def getNewInstructions():
         except:
                 return redirect(url_for('dashboard'))
         return getInstruction(map_id, session_id )
+
+@app.route('/getCarDatas', methods = ['POST'])
+def getCarDataRouting():
+    return getCarData()
+
+@app.route('/game_start')
+def gameStart():
+    return render_template("game/game_start.html")
+@app.route('/game_lobby')
+def gameLobby():
+    return render_template("game/game_lobby.html")
+
+@app.route('/start_game_lobby')
+def start_gameLobby():
+    return render_template("game/start_game_lobby.html")
 
 def currMap(id):
     return getCurrentMap(id)
