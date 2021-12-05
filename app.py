@@ -3,7 +3,7 @@ from flask.helpers import send_from_directory
 from init import app
 from controller.userManagement import isTeacher
 from controller.mapControl import createMap, isValidMap, makeChallenge
-from controller.instructionControl import createInstruction, getInstruction, getCarData
+from controller.instructionControl import setInstruction, getInstruction, getCarData
 
 
 @app.route('/')
@@ -63,7 +63,7 @@ def createNewInstruction():
 
         except:
                 return redirect(url_for('dashboard'))
-        return createInstruction(map_id, executed, command, session_id)
+        return setInstruction(map_id, executed, command, session_id)
 
 @app.route('/getInstructions', methods = ['POST'])
 def getNewInstructions():

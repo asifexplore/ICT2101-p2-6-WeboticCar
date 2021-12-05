@@ -271,57 +271,10 @@
           </xml>
         
           <script type=text/javascript >
-            function runCode() {
-                // Axios 
-                axios 
-                  .post("/getInstructions", {
-                    map_id : 1, 
-                    session_id : 1+""
-                  })
-                  .then(function (response) {
-                    // Success Then go to next page. 
-                    // Redirect to Jonah Page | Change this at a later date.
-                    //alert("Success, Data Received");
-
-                    // Update Blockly 
-                    console.log(response["data"]["instruction"]);
-                    Latestinstructions = response["data"]["instruction"]+"";
-                    console.log(typeof(Latestinstructions));
-                    newIns = Latestinstructions.split("");
-                    console.log(newIns);
-                    
-                    for (let i = 0; i < newIns.length; i++)
-                    {
-                        if (newIns[i] == "2")
-                        {
-                            // Straight Block 
-                            console.log("merging block"); 
-                            document.getElementById("startBlocks").innerHTML += "<block type='move_block' id='^f+eSmxMe^PS7#w+O?(H' x='45' y='46'><field name='movement'>1</field></block>" ;
-                            console.log("Safe");
-                        }
-
-                        
-                    }
-
-                    // Append to HTML
-                    
-
-                  })
-                  .catch(function (error) {
-                    console.log(error);
-                    alert('Error Retriving Instructions, Try again later');
-                  });
-              }
-
               $(document).ready(function() {
-
                 console.log( "ready!" );
-                //runCode();
 
-                // Run code to get data
-                  // Axios 
-                  
-                
+                // Set Interval --> Does Axios to refresh data on screen at set interval timing.
                     setInterval(function(){ 
                         if (started == 1)
                         {
@@ -347,12 +300,7 @@
                             }); 
                         }     
                     }, 5000);
-                    
-                
-                
-
             });
-
           </script> 
 
           <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">

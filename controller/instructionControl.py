@@ -28,7 +28,7 @@ def getInstruction(map_id: int, session_id: str) -> Instruction:
     
 
 # Set Instruction
-def createInstruction(map_id, executed, command, session_id):
+def setInstruction(map_id, executed, command, session_id):
     if map_id == None or executed == None or command == None or session_id == None:
         return render_template("dashboard.html")
     
@@ -42,15 +42,3 @@ def createInstruction(map_id, executed, command, session_id):
     # Return Json Object Here. 
     return jsonify({"Result": "Success"})
 
-# 
-def getCarData():
-    print(" Car Data Function ")
-    # testing = Instruction.query.filter_by(map_id=map_id, session_id=session_id).first()
-    carDataConn = sqlite3.connect('database.db')
-    carDataCursor = carDataConn.cursor()
-    carDataCursor.execute("SELECT * FROM car_data")
-    testing = carDataCursor.fetchall()
-    print(testing)
-    print(testing[0])
-
-    return jsonify({"Result":"Success", "car_id":testing[0][0], "distance":testing[0][1], "speed": testing[0][2] })
