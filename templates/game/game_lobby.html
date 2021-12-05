@@ -314,7 +314,7 @@ function showCode() {
     .post("/createInstructions", {
       executed: false, 
       command : parseInt(code), 
-     // map_id : 1, (Need to take from angie side) 
+      map_id : 1, // To be updated after Angie is done with this portion 
       session_id : 1
     })
     .then(function (response) {
