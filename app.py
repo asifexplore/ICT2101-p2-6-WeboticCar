@@ -5,6 +5,7 @@ from controller.userManagement import userLogin, isTeacher , redirectTeacher
 from controller.challengeControl import makeChallenge, stopChallenge
 from controller.mapControl import createMap, deleteMap, getGrid, isValidMap, makeChallenge
 from controller.instructionControl import setInstruction, getInstruction
+from controller.scoreControl import setHighscore, getHighscore, checkHighscore
 from currentMap import getCurrentMap
 from controller.apiManagement import getCarInstruction, getCarData, setCarData
 

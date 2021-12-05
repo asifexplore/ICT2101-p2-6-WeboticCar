@@ -1,9 +1,7 @@
-from flask import render_template
 from flask.helpers import url_for
 from flask.templating import render_template
 from werkzeug.utils import redirect
-from init import app, Highscore, db
-import uuid
+from init import Highscore
 # -------JS Pop-up with highscore table [addHighscore(commands, time)]-------
 
 
