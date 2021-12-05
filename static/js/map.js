@@ -19,16 +19,18 @@ function cycleValue(id){
 }
 
 function doSubmit(){
-    document.getElementById("one").value = classToInt(document.getElementById("1"));
-    document.getElementById("two").value = classToInt(document.getElementById("2"));
-    document.getElementById("three").value = classToInt(document.getElementById("3"));
-    document.getElementById("four").value = classToInt(document.getElementById("4"));
-    document.getElementById("five").value = classToInt(document.getElementById("5"));
-    document.getElementById("six").value = classToInt(document.getElementById("6"));
-    document.getElementById("seven").value = classToInt(document.getElementById("7"));
-    document.getElementById("eight").value = classToInt(document.getElementById("8"));
-    document.getElementById("nine").value = classToInt(document.getElementById("9"));
-    document.getElementById("ten").value = classToInt(document.getElementById("0"));
+    let grid = ""
+    grid += classToInt(document.getElementById("1"));
+    grid += classToInt(document.getElementById("2"));
+    grid += classToInt(document.getElementById("3"));
+    grid += classToInt(document.getElementById("4"));
+    grid += classToInt(document.getElementById("5"));
+    grid += classToInt(document.getElementById("6"));
+    grid += classToInt(document.getElementById("7"));
+    grid += classToInt(document.getElementById("8"));
+    grid += classToInt(document.getElementById("9"));
+    grid += classToInt(document.getElementById("0"));
+    document.getElementById("grid").value = grid
 }
 
 function classToInt(row){
@@ -57,5 +59,9 @@ $(document).ready(function() {
         doSubmit();
         $("#mapform").submit();
     });
+<<<<<<< HEAD
 });
 
+=======
+});
+>>>>>>> Development-Integration-(Marven-and-Kok-Hwee)

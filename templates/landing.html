@@ -1,3 +1,30 @@
+<<<<<<< HEAD
 <!--
     Make page, redirect to student or teacher dashboard    
 -->
+=======
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Webotic Car</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+{% endblock %}
+
+{#purpose of this line is to not inherit the navbar.#}
+{% block content %}{% endblock %}
+
+{% block body %}
+<div class="content">
+        <div class="center">
+            <h1>Webotic Car</h1>
+            <p>Students click <a href="/student">here</a></p>
+            <p>Are you a teacher? Click <a href="/login">here</a> to get started.</p>
+        </div>
+</div>
+{% endblock %}
+
+>>>>>>> Development-Integration-(Marven-and-Kok-Hwee)
