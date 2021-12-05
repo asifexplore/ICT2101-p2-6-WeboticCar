@@ -6,6 +6,7 @@ from controller.challengeControl import makeChallenge, stopChallenge
 from controller.mapControl import createMap, deleteMap, getGrid, isValidMap, makeChallenge
 from controller.instructionControl import setInstruction, getInstruction
 from currentMap import getCurrentMap
+from controller.apiManagement import getCarInstruction, getCarData, setCarData
 
 import sqlite3
 
@@ -47,6 +48,36 @@ def teacher():
         return render_template("teacherdashboard.html", maps=maps)
     else:
         return render_template("landing.html")
+
+@app.route('/addStudent', methods = ['GET', 'POST'])
+def register():
+    addStudent(request.form['username'], request.form['password'])
+    return redirectDashboard()
+
+@app.route('/getCarInstructions', methods = ['POST', 'GET'])
+def getCarNewInstructions():
+    if 'map_id' in request.args:
+        map_id = int(request.args['map_id'])
+    else:
+        return "Error: No id field provided. Please specify an id."
+    return getCarInstruction(map_id)
+
+@app.route('/getCarDatas', methods = ['POST', 'GET'])
+def getCarDataRouting():
+    return getCarData()
+
+@app.route('/setCarStatus', methods = ['GET', 'POST'])
+def setCarStatus():
+    if 'car_id' in request.args:
+        car_id = int(request.args['car_id'])
+    else:
+        return "Error: No id field provided. Please specify an id."
+    if 'distance' in request.args:
+            distance = int(request.args['distance'])
+    else:
+        return "Error: No id field provided. Please specify an id."
+    print(type(distance))
+    return setCarData(distance)
 
 @app.route('/deleteMap/<id>')
 def delMap(id):
@@ -135,11 +166,7 @@ def getNewInstructions():
         except:
                 return redirect(url_for('dashboard'))
         return getInstruction(map_id, session_id )
-
-@app.route('/getCarDatas', methods = ['POST'])
-def getCarDataRouting():
-    return getCarData()
-
+    
 @app.route('/game_start')
 def gameStart():
     return render_template("game/game_start.html")

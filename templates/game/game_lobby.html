@@ -312,9 +312,9 @@ function showCode() {
   // Axios 
   axios 
     .post("/createInstructions", {
-      executed: true, 
+      executed: false, 
       command : parseInt(code), 
-      map_id : 1, 
+     // map_id : 1, (Need to take from angie side) 
       session_id : 1
     })
     .then(function (response) {

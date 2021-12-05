@@ -39,3 +39,16 @@ def setInstruction(map_id, executed, command, session_id):
     # return render_template("login.html")
     # Return Json Object Here. 
     return jsonify({"Result": "Success"})
+
+# Get CarData
+def getCarData():
+    print(" Car Data Function ")
+    # testing = Instruction.query.filter_by(map_id=map_id, session_id=session_id).first()
+    carDataConn = sqlite3.connect('database.db')
+    carDataCursor = carDataConn.cursor()
+    carDataCursor.execute("SELECT * FROM car_data")
+    testing = carDataCursor.fetchall()
+    print(testing)
+    print(testing[0])
+
+    return jsonify({"Result":"Success", "car_id":testing[0][0], "distance":testing[0][1], "speed": testing[0][2] })
