@@ -3,7 +3,7 @@ from flask.helpers import send_from_directory
 from init import app
 from controller.userManagement import isTeacher
 from controller.mapControl import createMap, isValidMap, makeChallenge
-from controller.instructionControl import createInstruction, getInstruction
+from controller.instructionControl import createInstruction, getInstruction, getCarData
 
 
 @app.route('/')
@@ -17,10 +17,15 @@ def createNewMap():
 
 @app.route('/game_start')
 def gameStart():
-    return render_template("testing/game_start.html")
+    return render_template("game/game_start.html")
 @app.route('/game_lobby')
 def gameLobby():
-    return render_template("testing/game_lobby.html")
+    return render_template("game/game_lobby.html")
+
+@app.route('/start_game_lobby')
+def start_gameLobby():
+    return render_template("game/start_game_lobby.html")
+
 # Routing Background Sounds 
 @app.route('/media/<path:filename>')
 def download_file(filename):
@@ -75,6 +80,10 @@ def getNewInstructions():
         except:
                 return redirect(url_for('dashboard'))
         return getInstruction(map_id, session_id )
+
+@app.route('/getCarDatas', methods = ['POST'])
+def getCarDataRouting():
+    return getCarData()
 
 if __name__ == "__main__":
     context = ('cert.pem', 'key.pem')

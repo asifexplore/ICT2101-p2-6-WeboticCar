@@ -29,6 +29,29 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.id
 
+class carData(db.Model):
+    car_id = db.Column(db.Integer, primary_key=True)
+    distance = db.Column(db.Integer)
+    speed = db.Column(db.Integer)
+    
+    def __init__(self, distance, speed):
+        self.distance = distance
+        self.speed = speed
+    
+    def getDistance(self):
+        return self.distance
+
+    def getSpeed(self):
+        return self.speed
+    
+    def setDistance(self, distance:int):
+        self.distance = distance
+        return True
+
+    def setSpeed(self, speed:int):
+        self.speed = speed
+        return True
+
 class Instruction(db.Model):
     instruction_id = db.Column(db.Integer, primary_key=True)
     executed = db.Column(db.Boolean)

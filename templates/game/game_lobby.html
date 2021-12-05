@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webotic Car | Game Lobby</title>
+  <!-- Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{{url_for('static', filename='css/all.min.css')}}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{url_for('static', filename='css/adminlte.css')}}">
+
+  <script type=text/javascript src="{{
+    url_for('static', filename='js/blockly_compressed.js') }}"></script>
+         <script type=text/javascript src="{{
+    url_for('static', filename='js/blocks_compressed.js') }}"></script>
+         <script type=text/javascript src="{{
+    url_for('static', filename='js/en.js') }}"></script>
+         <script type=text/javascript src="{{
+    url_for('static', filename='js/javascript_compressed.js') }}"></script>
+
+    <style>
+      body {
+        background-color: #fff;
+        font-family: sans-serif;
+      }
+      h1 {
+        font-weight: normal;
+        font-size: 140%;
+      }
+    </style>
+
+    <style>
+      .grid_container {
+          background: lightgrey;
+          display: inline-block;
+          border: 2px solid lightgrey;
+      }
+
+      .grid {
+          display: grid;
+          grid-template-columns: repeat(10, 30px);
+          grid-template-rows: repeat(10, 30px);
+          grid-gap: 2px;
+      }
+
+      .cell {
+          /* center the cell content */
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          font-family: Arial;
+          font-size: 10px;
+          font-weight: bold;
+          background: white;
+      }
+
+      .specialBlocks {
+          color: white;
+      }
+
+      .obstacle {
+          background: white;
+      }
+
+      .road {
+          background: black;
+      }
+
+      .start {
+          background: green;
+      }
+
+      .end {
+          background: gray;
+      }
+
+      h2 {
+          text-align: center;
+      }
+
+      .blocksLegend {
+          font-size: 15px;
+          display: inline;
+      }
+
+      span {
+          margin: 0 1px 0 10px;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          font-size: 15px;
+          color: black;
+      }
+  </style>
+
+</head>
+<body class="sidebar-collapse">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-dark">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="index3.html" class="nav-link">Home</a>
+      </li>
+
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Game Lobby</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Game Lobby</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="info-box">
+              <span class="info-box-icon bg-info elevation-1"><i class="far fa-star"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Score</span>
+                <span class="info-box-number">
+                  -
+                  
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-bowling-ball"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Distance</span>
+                <span class="info-box-number">-</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-tachometer-alt"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Speed</span>
+                <span class="info-box-number">-</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+ 
+        <!-- /.row -->
+      </div><!--/. container-fluid -->
+      <div class="row">
+        <div class="col-md-12" id="div1" style="width:100%;height:100%; display: flex;justify-content: center;" >
+          <!-- PUT MAP HERE -->
+
+          <style>
+            table {
+              border-collapse: collapse;
+              margin-left:20px;
+              align-self: center;
+            }
+            table td {
+              border: 1px solid black;
+              width:150px;
+              height:95px;
+            }  
+          </style> 
+          <table>
+            <tr>
+              <td></td>
+              <td style=" background:#000000;"></td>
+              <td style=" background:#228B22;text-align:center;" id="start">Start</td>
+              <td></td>
+              <td style=" background:#000000;"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td style=" background:#000000;"></td>
+              <td></td>
+              <td></td>
+              <td style=" background:#000000;"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td style=" background:#000000;"></td>
+              <td></td>
+              <td style=" background:#808080;text-align:center;" id="finish"> End </td>
+              <td style=" background:#000000;"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td style=" background:#000000;"></td>
+              <td style=" background:#000000;"></td>
+              <td style=" background:#000000;"></td>
+              <td style=" background:#000000;"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+          
+
+        </div>
+        <div  class="col-md-12"  style=" text-align: center;">
+          <div  >
+            <br>
+            <i class="fa fa-square blocksLegend" style="color: black"><span>Road Block</span></i>
+            <i class="fa fa-square blocksLegend" style="color: green"><span>Start Block</span></i>
+            <i class="fa fa-square blocksLegend" style="color: gray"><span>End Block</span></i>
+        </div>
+        </div>
+      
+        
+        <!-- <div class="col-md-7"></div> --> 
+        <div class="col-md-12" style="margin-bottom:20px;">
+          <button type="button" onclick="startChallenge()" style="margin-top:20px;margin-right:40px" class="btn btn-block btn-success btn-lg">Start Challenge!</button>
+        </div> 
+      </div> 
+    </section>
+   
+    
+      
+  <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+ 
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+
+  
+
+  <script> 
+    Blockly.Blocks['move_block'] = {
+      init: function() {
+        this.appendDummyInput()
+            .appendField("Move Car")
+            .appendField(new Blockly.FieldDropdown([["Straight","1"], ["Left","2"], ["Right","3"]]), "movement");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+      }
+    };
+  Blockly.JavaScript['move_block'] = function(block) {
+  var dropdown_movement = block.getFieldValue('movement');
+  // TODO: Assemble JavaScript into code variable.
+  var code = dropdown_movement + '\n';
+  return code;
+  };
+
+
+// Function for Submit Button 
+function submitFunction()
+{
+  // Get Instructions style
+
+  // Alert the Instructions received
+  console.log("Submit Button!");
+  showCode();
+}
+</script> 
+<script>
+var demoWorkspace = Blockly.inject('blocklyDiv',
+    {media: '../../media/',
+     toolbox: document.getElementById('toolbox'), trashcan: true });
+Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+                           demoWorkspace);
+
+function startChallenge(){
+  window.location.href = "start_game_lobby";
+}
+
+function showCode() {
+  // Generate JavaScript code and display it.
+  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+  var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+  code = code.replace(/(\r\n|\n|\r)/gm, "");
+
+  console.log(code);
+  // Axios 
+  axios 
+    .post("/createInstructions", {
+      executed: true, 
+      command : parseInt(code), 
+      map_id : 1, 
+      session_id : 1
+    })
+    .then(function (response) {
+      // Success Then go to next page. 
+      // Redirect to Jonah Page | Change this at a later date.
+      alert("Instruction Sent!")
+      console.log(response)
+      window.location.href = "start_game_lobby";
+      
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+      alert('Error Saving Instructions, Try again later');
+    });
+}
+
+function runCode() {
+  // Axios 
+  axios 
+    .post("/getInstructions", {
+      map_id : 1, 
+      session_id : 1+""
+    })
+    .then(function (response) {
+      // Success Then go to next page. 
+      // Redirect to Jonah Page | Change this at a later date.
+      alert("Success, Data Received")
+      console.log(response)
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+      alert('Error Retriving Instructions, Try again later');
+    });
+}
+</script>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+</body>
+</html>
