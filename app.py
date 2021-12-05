@@ -1,6 +1,8 @@
 from flask import render_template, url_for, request, redirect, jsonify
 from init import app
-from UserManagement import userLogin, addStudent, redirectDashboard
+from controller.UserManagement import userLogin, addStudent, redirectDashboard
+from controller.instructionControl import createInstruction
+from controller.apiManagement import getCarInstruction, getCarData, setCarData
 
 @app.route('/')
 def index():
@@ -20,17 +22,30 @@ def register():
     addStudent(request.form['username'], request.form['password'])
     return redirectDashboard()
 
-@app.route('/getCarInstruction', methods = ['GET', 'POST'])
-def getCarInstruction():
-    return "123"
+@app.route('/getCarInstructions', methods = ['POST', 'GET'])
+def getNewInstructions():
+    if 'map_id' in request.args:
+        map_id = int(request.args['map_id'])
+    else:
+        return "Error: No id field provided. Please specify an id."
+    return getCarInstruction(map_id)
+
+@app.route('/getCarDatas', methods = ['POST', 'GET'])
+def getCarDataRouting():
+    return getCarData()
 
 @app.route('/setCarStatus', methods = ['GET', 'POST'])
 def setCarStatus():
-    if 'id' in request.args:
-        id = int(request.args['id'])
+    if 'car_id' in request.args:
+        car_id = int(request.args['car_id'])
     else:
         return "Error: No id field provided. Please specify an id."
-    return str(id)
+    if 'distance' in request.args:
+            distance = int(request.args['distance'])
+    else:
+        return "Error: No id field provided. Please specify an id."
+    print(type(distance))
+    return setCarData(distance)
 
 if __name__ == "__main__":
     context = ('cert.pem', 'key.pem')
