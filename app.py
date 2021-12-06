@@ -35,7 +35,7 @@ def download_file(filename):
     return send_from_directory("media/",filename)
 
 @app.route('/teacher', methods=['GET', 'POST'])
-def teacherdashboard():
+def teacher():
     if isTeacher():
         con = sqlite3.connect("database.db")
         con.row_factory = sqlite3.Row
@@ -47,6 +47,10 @@ def teacherdashboard():
         return render_template("teacherdashboard.html", maps=maps)
     else:
         return render_template("landing.html")
+
+@app.route('/teacherdashboard')
+def teacherdashboard():
+    return redirectTeacher()
 
 @app.route('/getCarInstructions', methods = ['POST', 'GET'])
 def getCarNewInstructions():
