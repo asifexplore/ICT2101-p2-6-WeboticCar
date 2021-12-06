@@ -73,7 +73,7 @@ Once it is bug and error free, it will be commited to the Development branch.
 
 *The two videos are very important because this module do not have a presentation*
 ### UAT section ###
-3 mins to cover the system
+https://youtu.be/rTttYdZrO0s
 
 
 ### Whitebox Testing ###
