@@ -6,6 +6,7 @@
   <title>Webotic Car | Game Lobby</title>
   <!-- Axios -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -96,6 +97,11 @@
       }
   </style>
 
+
+<script> var started = 0; </script> 
+
+
+
 </head>
 <body class="sidebar-collapse">
 <div class="wrapper">
@@ -106,7 +112,6 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="index3.html" class="nav-link">Home</a>
       </li>
-
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -144,9 +149,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Score</span>
-                <span class="info-box-number">
-                  -
-                  
+                <span class="info-box-number" id="score">
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -160,7 +163,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Distance</span>
-                <span class="info-box-number">-</span>
+                <span class="info-box-number" id="distance"></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -177,7 +180,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Speed</span>
-                <span class="info-box-number">-</span>
+                <span class="info-box-number" id="speed"></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -192,14 +195,12 @@
         <!-- /.row -->
       </div><!--/. container-fluid -->
       <div class="row">
-        <div class="col-md-12" id="div1" style="width:100%;height:100%; display: flex;justify-content: center;" >
+        <div class="col-md-6" id="div1">
           <!-- PUT MAP HERE -->
-
           <style>
             table {
               border-collapse: collapse;
               margin-left:20px;
-              align-self: center;
             }
             table td {
               border: 1px solid black;
@@ -211,8 +212,9 @@
             <tr>
               <td></td>
               <td style=" background:#000000;"></td>
-              <td style=" background:#228B22;text-align:center;" id="start">Start</td>
+              
               <td></td>
+              <td style=" background:#228B22;text-align:center;" id="start">Car</td>
               <td style=" background:#000000;"></td>
             </tr>
             <tr>
@@ -223,10 +225,11 @@
               <td style=" background:#000000;"></td>
             </tr>
             <tr>
-              <td></td>
-              <td style=" background:#000000;"></td>
               <td></td>
               <td style=" background:#808080;text-align:center;" id="finish"> End </td>
+              
+              <td></td>
+              <td style=" background:#000000;"></td>
               <td style=" background:#000000;"></td>
             </tr>
             <tr>
@@ -244,11 +247,7 @@
               <td></td>
             </tr>
           </table>
-          
-
-        </div>
-        <div  class="col-md-12"  style=" text-align: center;">
-          <div  >
+          <div style=" text-align: center;" >
             <br>
             <i class="fa fa-square blocksLegend" style="color: black"><span>Road Block</span></i>
             <i class="fa fa-square blocksLegend" style="color: green"><span>Start Block</span></i>
@@ -256,12 +255,61 @@
         </div>
         </div>
       
+        <div class="col-md-6" id="div2">
+          <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+      
+          <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+            <block type="move_block" id="^f+eSmxMe^PS7#w+O?(H" x="37" y="38">
+              <field name="movement">1</field>
+            </block>
+            <block type="move_block" id="^f+eSmxMe^PS7#w+O?(H" x="37" y="38">
+              <field name="movement">2</field>
+            </block>
+            <block type="move_block" id="^f+eSmxMe^PS7#w+O?(H" x="37" y="38">
+              <field name="movement">3</field>
+            </block>
+          </xml>
         
-        <!-- <div class="col-md-7"></div> --> 
-        <div class="col-md-12" style="margin-bottom:20px;">
-          <button type="button" onclick="startChallenge()" style="margin-top:20px;margin-right:40px" class="btn btn-block btn-success btn-lg">Start Challenge!</button>
-        </div> 
-      </div> 
+          <script type=text/javascript >
+              $(document).ready(function() {
+                console.log( "ready!" );
+
+                // Set Interval --> Does Axios to refresh data on screen at set interval timing.
+                    setInterval(function(){ 
+                        if (started == 1)
+                        {
+                            // Run Map Code here  
+                            axios 
+                            .post("/getCarDatas", {
+                            })
+                            .then(function (response) {
+                                // Success Then go to next page. 
+                                // Redirect to Jonah Page | Change this at a later date.
+                                console.log(response)
+                                document.getElementById("distance").textContent=response["data"]['distance'];
+                                document.getElementById("speed").textContent=response["data"]['speed'];
+                                document.getElementById("score").textContent=3;
+
+                                // Delete this 2 lines of code when integrating with map
+                                document.getElementById("finish").textContent="car";
+                                document.getElementById("start").textContent="";
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                                alert('Error Retriving Car Data, Try again later');
+                            }); 
+                        }     
+                    }, 5000);
+            });
+          </script> 
+
+          <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
+          </xml>
+        </div>
+        <div class="col-md-7"></div> 
+        <div class="col-md-4" style="margin-bottom:20px;">
+            <button type="button" onclick="showCode()" style="margin-top:20px;margin-right:40px" class="btn btn-block btn-success btn-lg">Execute Instructions!</button>
+            </div> 
     </section>
    
     
@@ -275,7 +323,7 @@
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-
+ 
   
 
   <script> 
@@ -298,16 +346,35 @@
   return code;
   };
 
-
-// Function for Submit Button 
-function submitFunction()
-{
-  // Get Instructions style
-
-  // Alert the Instructions received
-  console.log("Submit Button!");
-  showCode();
-}
+  function showCode() {
+    // Generate JavaScript code and display it.
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+    code = code.replace(/(\r\n|\n|\r)/gm, "");
+  
+    console.log(code);
+    // Axios 
+    axios 
+      .post("/createInstructions", {
+        executed: true, 
+        command : parseInt(code), 
+        map_id : 1, 
+        session_id : 1
+      })
+      .then(function (response) {
+        // Success Then go to next page. 
+        // Redirect to Jonah Page | Change this at a later date.
+        alert("Instruction Sent!")
+        console.log(response)
+        //window.location.href = "start_game_lobby";
+        started = 1;
+        
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert('Error Saving Instructions, Try again later');
+      });
+  }
 </script> 
 <script>
 var demoWorkspace = Blockly.inject('blocklyDiv',
@@ -316,59 +383,6 @@ var demoWorkspace = Blockly.inject('blocklyDiv',
 Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
                            demoWorkspace);
 
-function startChallenge(){
-  window.location.href = "start_game_lobby";
-}
-
-function showCode() {
-  // Generate JavaScript code and display it.
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-  var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
-  code = code.replace(/(\r\n|\n|\r)/gm, "");
-
-  console.log(code);
-  // Axios 
-  axios 
-    .post("/createInstructions", {
-      executed: true, 
-      command : parseInt(code), 
-      map_id : 1, 
-      session_id : 1
-    })
-    .then(function (response) {
-      // Success Then go to next page. 
-      // Redirect to Jonah Page | Change this at a later date.
-      alert("Instruction Sent!")
-      console.log(response)
-      window.location.href = "start_game_lobby";
-      
-      
-    })
-    .catch(function (error) {
-      console.log(error);
-      alert('Error Saving Instructions, Try again later');
-    });
-}
-
-function runCode() {
-  // Axios 
-  axios 
-    .post("/getInstructions", {
-      map_id : 1, 
-      session_id : 1+""
-    })
-    .then(function (response) {
-      // Success Then go to next page. 
-      // Redirect to Jonah Page | Change this at a later date.
-      alert("Success, Data Received")
-      console.log(response)
-      
-    })
-    .catch(function (error) {
-      console.log(error);
-      alert('Error Retriving Instructions, Try again later');
-    });
-}
 </script>
 
 </div>
