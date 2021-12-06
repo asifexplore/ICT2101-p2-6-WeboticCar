@@ -62,13 +62,13 @@ It will only be committed after the tests have been done at the Development bran
 by Kok Hwee only.
 
 ### Development ###
-Development branch will be used for testing where we intergrate our individual components together
+The Sub-Development-Integration branch will be used for testing where we intergrate our individual components together
 to test out all the features. Only when it is bug and error free, then it will be committed to
-the Master branch.
+the Development branch.
 
 ### Features ###
-Angie, Asif, Marven, Nadzim and Kok Hwee branches will be used to to test our own individual components.
-Once it is bug and error free, it will be commited to the Development branch.
+Each of us will have our individual branches which will be used to to test our own individual components.
+Once it is bug and error free, it will be commited to the Sub-Development-Integration branch.
 
 
 *The two videos are very important because this module do not have a presentation*
