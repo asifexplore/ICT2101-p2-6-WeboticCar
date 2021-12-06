@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block head %}
+<title>Add Highscore</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% endblock %}
+{% block body %}
+<container>
+  <h1>Highscore Map {{map}}</h1>
+  <h2>You've set a highscore!</h2>
+  <div class="row">
+  <div class="col-sm-8">
+    <form action ="/sethighscore" method="POST">
+      <label for="username">Username:</label><br>
+      <input type="text" id="username" name="username"><br>
+      <input type="submit" value="Add Highscore">
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-8">
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for details in detailsTable %}
+      <tr>
+        <td>{{ details }}</td>
+        <td>{{ details.name }}</td>
+        <td>{{ details.score }}</td>
+      </tr>
+      {% endfor %} 
+    </tbody>
+  </table>
+</div>
+</div>
+</container>
+{% endblock %}
