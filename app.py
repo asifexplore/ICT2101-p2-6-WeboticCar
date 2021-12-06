@@ -5,6 +5,7 @@ from controller.userManagement import userLogin, isTeacher , redirectTeacher
 from controller.challengeControl import makeChallenge, stopChallenge
 from controller.mapControl import createMap, deleteMap, getGrid, isValidMap, makeChallenge
 from controller.instructionControl import setInstruction, getInstruction
+from controller.scoreControl import setHighscore, getHighscore, checkHighscore
 from currentMap import getCurrentMap
 from controller.apiManagement import getCarInstruction, getCarData, setCarData
 
@@ -96,7 +97,7 @@ def createChallenge():
 @app.route('/playChallenge')
 def playChallenge():
     return render_template("playchallenge.html")
- 
+
 @app.route('/student', methods=['GET', 'POST'])
 def student():
     # con = sqlite3.connect("database.db")
@@ -124,8 +125,8 @@ def login():
         if userLogin(request.form['username'], request.form['password']):
             return redirect(url_for('teacher'))
         return render_template("login.html")
-  
-# Routing Background Sounds 
+
+# Routing Background Sounds
 @app.route('/media/<path:filename>')
 def download_file(filename):
     return send_from_directory("media/",filename)
@@ -133,11 +134,11 @@ def download_file(filename):
 @app.route('/game/<game_id>')
 def game(game_id):
     return render_template("game_map.html", game_map=getGrid(game_id))
- 
+
 @app.route('/api/currentmap/<id>')
 def currMap(id):
     return getCurrentMap(id)
-    
+
 @app.route('/createInstructions', methods = ['POST'])
 def createNewInstruction():
     if request.method == 'POST':
@@ -162,11 +163,11 @@ def getNewInstructions():
                 session_id = request.json['session_id']
                 print("Type of map_id", type(map_id))
                 print("Type of map_id", type(session_id))
-                
+
         except:
                 return redirect(url_for('dashboard'))
         return getInstruction(map_id, session_id )
-    
+
 @app.route('/game_start')
 def gameStart():
     return render_template("game/game_start.html")
@@ -180,6 +181,41 @@ def start_gameLobby():
 
 def currMap(id):
     return getCurrentMap(id)
+
+@app.route('/endgame', methods = ['GET', 'POST'])
+def endgame():
+    if request.method == 'POST':
+        score = 3000
+        mapId = 3
+        detailsTable = getHighscore(mapId)
+        if checkHighscore(score,detailsTable):
+            redirect(url_for('challengeCompleted'))
+        else:
+            redirect(url_for('challengeCompleted'))
+
+@app.route('/addHighscore', methods = ['GET'])
+def addHighscore():
+    return render_template('addhighscore.html')
+
+@app.route('/sethighscore', methods = ['POST'])
+def sethighscore():
+    mapId = 3
+    score = 3000
+    if request.method == 'POST':
+        name = request.form['username']
+        setHighscore(mapId, name, score)
+        # detailsTable = getHighscore(mapId)
+        return redirect(f'viewhighscore/{mapId}')
+
+@app.route('/viewhighscore/<mapId>', methods = ['GET'])
+def viewhighscore(mapId):
+    mapId = 1
+    detailsTable = getHighscore(mapId)
+    return render_template("viewhighscore.html", detailsTable = detailsTable)
+
+@app.route('/challengeCompleted')
+def challengeCompleted():
+    return render_template('challengeCompleted.html') # render_template("challengeCompleted.html")
 
 if __name__ == "__main__":
     context = ('cert.pem', 'key.pem')
