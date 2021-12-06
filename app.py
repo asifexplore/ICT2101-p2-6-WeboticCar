@@ -177,7 +177,7 @@ def currMap(id):
 def endgame():
     if request.method == 'POST':
         score = 3000
-        mapId = 3
+        mapId = 4
         detailsTable = getHighscore(mapId)
         if checkHighscore(score,detailsTable):
             redirect(url_for('challengeCompleted'))
@@ -186,11 +186,12 @@ def endgame():
 
 @app.route('/addHighscore', methods = ['GET'])
 def addHighscore():
-    return render_template('addhighscore.html')
+    detailsTable = getHighscore(4)
+    return render_template('addhighscore.html', detailsTable = detailsTable)
 
 @app.route('/sethighscore', methods = ['POST'])
 def sethighscore():
-    mapId = 3
+    mapId = 4
     score = 3000
     if request.method == 'POST':
         name = request.form['username']
@@ -200,7 +201,7 @@ def sethighscore():
 
 @app.route('/viewhighscore/<mapId>', methods = ['GET'])
 def viewhighscore(mapId):
-    mapId = 1
+    mapId = 4
     detailsTable = getHighscore(mapId)
     return render_template("viewhighscore.html", detailsTable = detailsTable)
 

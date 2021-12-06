@@ -6,7 +6,7 @@
 {% endblock %}
 {% block body %}
 <container>
-  <h1>Highscore Map {{map_id}}</h1>
+  <h1>Highscore Map {{map}}</h1>
   <h2>You've set a highscore!</h2>
   <div class="row">
   <div class="col-sm-8">
@@ -29,11 +29,11 @@
       </tr>
     </thead>
     <tbody>
-      {% for i, (score_id, map_id, name, score) in detailsTable %}
+      {% for details in detailsTable %}
       <tr>
-        <td>{{ i }}</td>
-        <td>{{ name }}</td>
-        <td>{{ score }}</td>
+        <td>{{ details }}</td>
+        <td>{{ details.name }}</td>
+        <td>{{ details.score }}</td>
       </tr>
       {% endfor %} 
     </tbody>
