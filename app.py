@@ -49,11 +49,6 @@ def teacher():
     else:
         return render_template("landing.html")
 
-@app.route('/addStudent', methods = ['GET', 'POST'])
-def register():
-    addStudent(request.form['username'], request.form['password'])
-    return redirectDashboard()
-
 @app.route('/getCarInstructions', methods = ['POST', 'GET'])
 def getCarNewInstructions():
     if 'map_id' in request.args:
@@ -91,23 +86,9 @@ def createChallenge():
     except:
         return redirect(url_for('teacherdashboard'))
     return makeChallenge(map_id, pin)
-
-# insert code for play challenge here
-@app.route('/playChallenge')
-def playChallenge():
-    return render_template("playchallenge.html")
  
 @app.route('/student', methods=['GET', 'POST'])
 def student():
-    # con = sqlite3.connect("database.db")
-    # con.row_factory = sqlite3.Row
-    #
-    # cur = con.cursor()
-    # cur.execute("SELECT * FROM challenges WHERE pin IS NOT NULL")
-    #
-    # rows = cur.fetchall();
-    # return render_template("studentdashboard.html", rows=rows)
-
     if request.method == 'GET':
         return render_template("studentdashboard.html")
     else:
