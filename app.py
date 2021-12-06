@@ -12,7 +12,6 @@ from controller.apiManagement import getCarInstruction, getCarData, setCarData
 
 import sqlite3
 
-
 @app.route('/')
 def index():
     return render_template("landing.html")
@@ -23,20 +22,8 @@ def teacherdashboard():
 
 @app.route('/createMap', methods=['GET', 'POST'])
 def createNewMap():
-    # comment out this line if testing without teacher account
-    # if not isTeacher():
-    #     return render_template('login.html')
-
+    
      if request.method == 'GET':
-
-# Routing Background Sounds 
-@app.route('/media/<path:filename>')
-def download_file(filename):
-    return send_from_directory("media/",filename)
-
-@app.route('/login', methods = ['GET', 'POST'])
-def login():
-    if request.method == 'GET':
         return createMap(0)
      elif request.method == 'POST':
         form = request.form
@@ -45,6 +32,11 @@ def login():
             return createMap(form)
         else:
             redirect(url_for('createNewMap'))
+ 
+# Routing Background Sounds 
+@app.route('/media/<path:filename>')
+def download_file(filename):
+    return send_from_directory("media/",filename)
 
 @app.route('/teacher', methods=['GET', 'POST'])
 def teacher():
@@ -126,11 +118,6 @@ def login():
         if userLogin(request.form['username'], request.form['password']):
             return redirect(url_for('teacher'))
         return render_template("login.html")
-
-# Routing Background Sounds
-@app.route('/media/<path:filename>')
-def download_file(filename):
-    return send_from_directory("media/",filename)
 
 @app.route('/game/<game_id>')
 def game(game_id):

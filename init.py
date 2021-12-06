@@ -60,9 +60,9 @@ class carData(db.Model):
 class Instruction(db.Model):
     instruction_id = db.Column(db.Integer, primary_key=True)
     executed = db.Column(db.Boolean)
-    command = db.Column(db.Integer(10))
-    map_id = db.Column(db.Integer(10))
-    session_id = db.Column(db.String(10))
+    command = db.Column(db.Integer)
+    map_id = db.Column(db.Integer)
+    session_id = db.Column(db.String)
 
     def __init__(self, instruction_id, executed, command, map_id, session_id):
         self.instruction_id = instruction_id
