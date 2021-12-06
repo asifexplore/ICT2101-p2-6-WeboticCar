@@ -210,4 +210,4 @@ def challengeCompleted():
 if __name__ == "__main__":
     context = ('cert.pem', 'key.pem')
     app.run(debug=True, host="0.0.0.0", port="5000")
-    app.run(ssl_context=context, debug=True)
+    # app.run(ssl_context=context, debug=True)
