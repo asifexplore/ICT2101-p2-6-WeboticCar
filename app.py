@@ -100,15 +100,6 @@ def playChallenge():
 
 @app.route('/student', methods=['GET', 'POST'])
 def student():
-    # con = sqlite3.connect("database.db")
-    # con.row_factory = sqlite3.Row
-    #
-    # cur = con.cursor()
-    # cur.execute("SELECT * FROM challenges WHERE pin IS NOT NULL")
-    #
-    # rows = cur.fetchall();
-    # return render_template("studentdashboard.html", rows=rows)
-
     if request.method == 'GET':
         return render_template("studentdashboard.html")
     else:
