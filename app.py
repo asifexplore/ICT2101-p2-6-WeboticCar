@@ -1,4 +1,5 @@
 from flask import render_template, url_for, request, redirect
+from flask.helpers import send_from_directory
 from init import app
 
 from controller.userManagement import userLogin, isTeacher , redirectTeacher
@@ -27,6 +28,15 @@ def createNewMap():
     #     return render_template('login.html')
 
      if request.method == 'GET':
+
+# Routing Background Sounds 
+@app.route('/media/<path:filename>')
+def download_file(filename):
+    return send_from_directory("media/",filename)
+
+@app.route('/login', methods = ['GET', 'POST'])
+def login():
+    if request.method == 'GET':
         return createMap(0)
      elif request.method == 'POST':
         form = request.form
@@ -162,6 +172,7 @@ def getNewInstructions():
 @app.route('/game_start')
 def gameStart():
     return render_template("game/game_start.html")
+
 @app.route('/game_lobby')
 def gameLobby():
     return render_template("game/game_lobby.html")

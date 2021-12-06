@@ -56,15 +56,16 @@ class carData(db.Model):
     def setSpeed(self, speed:int):
         self.speed = speed
         return True
-
+  
 class Instruction(db.Model):
     instruction_id = db.Column(db.Integer, primary_key=True)
     executed = db.Column(db.Boolean)
-    command = db.Column(db.Integer)
-    map_id = db.Column(db.Integer)
-    session_id = db.Column(db.String)
+    command = db.Column(db.Integer(10))
+    map_id = db.Column(db.Integer(10))
+    session_id = db.Column(db.String(10))
 
-    def __init__(self, executed, command, map_id, session_id):
+    def __init__(self, instruction_id, executed, command, map_id, session_id):
+        self.instruction_id = instruction_id
         self.executed = executed
         self.command = command
         self.map_id = map_id
@@ -75,12 +76,18 @@ class Instruction(db.Model):
     def getSesson_id(self):
         return self.session_id
 
+        
+    def getSesson_id(self):
+        return self.session_id
+    
     def getCommand(self):
         return self.command
 
     def setCommand(self, commands:int) -> bool:
         self.command = commands
         return True
+        self.command = commands 
+        return True 
 
     def getMap_id(self):
         return self.map_id
@@ -90,7 +97,7 @@ class Instruction(db.Model):
 
     def setExecuted(self, executed:bool) -> bool:
         self.executed = executed
-        return True
+        return True   
 
     def getInstructionID(self):
             return self.instruction_id
