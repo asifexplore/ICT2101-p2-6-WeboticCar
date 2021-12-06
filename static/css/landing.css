@@ -1,0 +1,42 @@
+body, html {
+    margin: 0;
+    color: #ffffff;
+    font-family: "Gill Sans MT";
+    background-color: #94B3FD;
+}
+
+.content {
+    margin: 0 auto;
+    width: 400px;
+}
+
+.content .center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: transparent;
+    text-align: center;
+    padding: 10px;
+}
+
+a:link {
+    color: #fafafa;
+}
+
+a:visited {
+    color: red;
+}
+
+p {
+    font-size: 18px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 65px;
+}
+
+#content {
+    width: 70%;
+}

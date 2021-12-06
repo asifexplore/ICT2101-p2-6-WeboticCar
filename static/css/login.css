@@ -1,0 +1,52 @@
+
+html,body{
+background-color: #94B3FD;
+height: 100%;
+font-family: "Gill Sans MT";
+}
+
+.container{
+height: 100%;
+align-content: center;
+}
+
+.card{
+height: 280px;
+margin-top: auto;
+margin-bottom: auto;
+width: 400px;
+background-color: #ffffff !important;
+}
+.card-footer{
+color: #000000;
+}
+
+.card-header h3{
+    color: #000000;
+    text-align:center;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+
+}
+
+.login_btn{
+color: white;
+background-color: darkgrey;
+width: 100px;
+}
+
+.login_btn:hover{
+color: black;
+background-color: white;
+}
+
+.links{
+color: white;
+}
+
+.links a{
+margin-left: 4px;
+}
