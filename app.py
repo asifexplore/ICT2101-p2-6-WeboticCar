@@ -3,7 +3,7 @@ from flask.helpers import send_from_directory
 from init import app
 
 from controller.userManagement import userLogin, isTeacher , redirectTeacher
-from controller.challengeControl import makeChallenge, stopChallenge
+from controller.challengeControl import makeChallenge, stopChallenge, getChallenge
 from controller.mapControl import createMap, deleteMap, getGrid, isValidMap, makeChallenge
 from controller.instructionControl import setInstruction, getInstruction
 from controller.scoreControl import setHighscore, getHighscore, checkHighscore
@@ -15,10 +15,6 @@ import sqlite3
 @app.route('/')
 def index():
     return render_template("landing.html")
-
-@app.route('/teacherdashboard')
-def teacherdashboard():
-    return redirectTeacher()
 
 @app.route('/createMap', methods=['GET', 'POST'])
 def createNewMap():
@@ -39,7 +35,7 @@ def download_file(filename):
     return send_from_directory("media/",filename)
 
 @app.route('/teacher', methods=['GET', 'POST'])
-def teacher():
+def teacherdashboard():
     if isTeacher():
         con = sqlite3.connect("database.db")
         con.row_factory = sqlite3.Row
@@ -51,11 +47,6 @@ def teacher():
         return render_template("teacherdashboard.html", maps=maps)
     else:
         return render_template("landing.html")
-
-@app.route('/addStudent', methods = ['GET', 'POST'])
-def register():
-    addStudent(request.form['username'], request.form['password'])
-    return redirectDashboard()
 
 @app.route('/getCarInstructions', methods = ['POST', 'GET'])
 def getCarNewInstructions():
@@ -94,11 +85,6 @@ def createChallenge():
     except:
         return redirect(url_for('teacherdashboard'))
     return makeChallenge(map_id, pin)
-
-# insert code for play challenge here
-@app.route('/playChallenge')
-def playChallenge():
-    return render_template("playchallenge.html")
 
 @app.route('/student', methods=['GET', 'POST'])
 def student():
